@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from mysql.mysql import Mysql
-
-a = Mysql()
+import hello
+import json
 
 def start():
-    print a.connect()
+    print hello.getDataLimit()
 
 if __name__ == '__main__':
     start()

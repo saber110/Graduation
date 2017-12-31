@@ -4,4 +4,4 @@
 host = "localhost"
 username = "root"
 password = "yycx1996"
-database = "ForYou"
+database = "SmartChair"

@@ -10,8 +10,11 @@ class Mysql(object):
     def __init__(self):
         super(Mysql, self).__init__()
 
-    def connect(self):
-        db = MySQLdb.connect(mysqlconfig.host,mysqlconfig.username, mysqlconfig.password, mysqlconfig.database, charset='utf8',cursorclass=MySQLdb.cursors.DictCursor)
+    def connect(self, type='json'):
+        if type == 'json':
+            db = MySQLdb.connect(mysqlconfig.host,mysqlconfig.username, mysqlconfig.password, mysqlconfig.database, charset='utf8',cursorclass=MySQLdb.cursors.DictCursor)
+        else:
+            db = MySQLdb.connect(mysqlconfig.host,mysqlconfig.username, mysqlconfig.password, mysqlconfig.database, charset='utf8')
         return db
 
     def getData(self,db, query, table):
