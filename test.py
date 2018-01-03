@@ -4,7 +4,7 @@ import hello
 import json
 
 def start():
-    print hello.getDataLimit()
+    print hello.getWeather()
 
 if __name__ == '__main__':
     start()

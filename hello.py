@@ -2,6 +2,7 @@
 # coding=utf-8
 import os
 import json
+import StringIO
 import pycurl
 from mysql.mysql import Mysql
 from flask import Flask
@@ -26,7 +27,7 @@ def gethumidity(uuid = 'UuidExample'):
 
 @app.route('/api/heartRate/<uuid>')
 def getheartRate(uuid = 'UuidExample'):
-    return getDataLimit('HeartRate',uuid)
+    return getDataLimit('HeartRate,SpO2',uuid)
     pass
 
 def getDataLastly(field = 'Temperature', table = 'UuidExample'):
@@ -40,12 +41,6 @@ def getDataLimit(field = 'HeartRate', table = 'UuidExample',limit=10):
     db = mysql.connect('data')
     data = mysql.getData(db, "select "+ field +" from "+table +" ORDER BY id DESC limit " + str(limit) + " ;", table)
     mysql.close(db)
-
-    # result = ''
-    # for value in data:
-    #     result += str(value[0])
-    #     result += ","
-    #     pass
 
     return json.dumps(data)
     pass
@@ -72,6 +67,7 @@ def login():
             error = 'Invalid username/password'
     return render_template('login.html', error=error)
 
+@app.route('/api/getsoup')
 def getSoup():
     """读取网路接口，获取心灵鸡汤"""
     c = pycurl.Curl()
@@ -81,7 +77,23 @@ def getSoup():
     b = StringIO.StringIO()
     c.setopt(c.WRITEFUNCTION, b.write)
     c.perform()
-    return json.loads(b.getvalue())
+    return (b.getvalue())
+
+@app.route('/api/getweather')
+def getWeather():
+    """
+        读取网路接口，获取天气
+        http://wthrcdn.etouch.cn/weather_mini?city=%E9%95%BF%E6%B2%99
+    """
+    c = pycurl.Curl()
+    c.setopt(pycurl.FORBID_REUSE, 1)
+    c.setopt(pycurl.ENCODING,"")                        #解压缩数据
+    c.setopt(pycurl.URL,"http://wthrcdn.etouch.cn/weather_mini?city=长沙")
+    c.setopt(pycurl.USERAGENT,"Mozilla/5.2 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50324)")
+    b = StringIO.StringIO()
+    c.setopt(c.WRITEFUNCTION, b.write)
+    c.perform()
+    return (b.getvalue())
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0',port = 7777)
