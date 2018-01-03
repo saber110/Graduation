@@ -1,6 +1,7 @@
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../../app.component'
 
 @Injectable()
 export class DataService {
@@ -8,7 +9,11 @@ export class DataService {
   private uuid = 'UuidExample';
   // private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private app: AppComponent,) {
+    console.log(app.getUuid());
+    this.uuid = app.getUuid();
+  }
 
   getTemperature() {
     return this.http.get('/api/temperature/' + this.uuid)
