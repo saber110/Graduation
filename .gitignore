@@ -35,3 +35,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 ## db
 mysql/mysqlconfig.py
+## npm modules
+admin/node_modules
