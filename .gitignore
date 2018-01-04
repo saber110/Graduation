@@ -32,8 +32,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 ## python pyc
 *.pyc
-
+## c
+*.o
 ## db
 mysql/mysqlconfig.py
 ## npm modules
-admin/node_modules
+server/admin/node_modules
