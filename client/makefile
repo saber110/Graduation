@@ -1,15 +1,32 @@
-LIBS = -lwiringPi
-objects = smartchair.o algorithm.o bsp_i2c_gpio.o max30102.o cJSON.o DHT11.o mlx90614.o weather.o
-smartchair : $(objects)
-	cc -o smartchair -g $(objects) $(LIBS)
-smartchair.o : main.h bsp_i2c_gpio.h algorithm.h max30102.h
-bsp_i2c_gpio.o : bsp_i2c_gpio.h main.h
-algorithm.o : algorithm.h main.h
-max30102.o : max30102.h main.h bsp_i2c_gpio.h
-cJSON.o : cJSON.h
-DHT11.o : DHT11.h
-mlx90614.o : mlx90614.h
-weather.o : weather.h cJSON.h
+CC = gcc
 
-clean :
-	rm smartchair $(objects)
+DIR_INC = ./include
+DIR_SRC = ./src
+DIR_OBJ = ./obj
+DIR_BIN = ./bin
+
+SRC = $(wildcard ${DIR_SRC}/*.c ${DIR_SRC}/daemon/*.c)
+OBJ = $(patsubst %.c,${DIR_OBJ}/%.o,$(notdir ${SRC}))
+
+TARGET = main
+
+BIN_TARGET = ${DIR_BIN}/${TARGET}
+
+CFLAGS = -g -O2 -Wall -I${DIR_INC} -lwiringPi -Iusr/include/mysql -lmysqlclient
+
+${BIN_TARGET} : ${OBJ}
+	${CC} ${CFLAGS} ${OBJ}  -o $@
+
+${DIR_OBJ}/%.o : ${DIR_SRC}/%.c
+	$(CC) ${CFLAGS} -c $< -o $@
+
+
+${DIR_OBJ}/%.o : ${DIR_SRC}/daemon/%.c
+	$(CC) ${CFLAGS} -c $< -o $@
+
+.PHONY : clean run
+clean:
+	rm -f ${DIR_OBJ}/*.o ${BIN_TARGET}
+
+run:
+	${BIN_TARGET}

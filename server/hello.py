@@ -1,20 +1,19 @@
-#!/usr/bin/env python
-# coding=utf-8
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
 import os
 import json
 import StringIO
 import pycurl
 from mysql.mysql import Mysql
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 mysql = Mysql()
 
-@app.route('/')
-def index():
-    # JokeContent = getKJokeContentById(1)
-    # username = request.cookies.get('username')
-    return render_template('index.html',JokeTitle = JokeTitle)
+@app.route('/api/DataSync/<uuid>/<HeartRate>/<SpO2>/<Temperature>/<Humidity>/<Weather>/<UsageTime>')
+def updateData(uuid,HeartRate,SpO2,Temperature,Humidity,Weather,UsageTime):
+    query("insert into "+uuid+" (HeartRate,SpO2,Temperature,Humidity,Weather,UsageTime) VALUES ('"+HeartRate+"','"+SpO2+"','"+Temperature+"','"+Humidity+"','"+Weather+"','"+UsageTime+"');")
+    return "ewdew"
 
 @app.route('/api/temperature/<uuid>')
 def getTemperature(uuid='UuidExample'):

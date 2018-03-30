@@ -43,3 +43,11 @@ http://127.0.0.1:4200/#/pages/dashboard/uuid
 http://127.0.0.1:4200/#/pages/dashboard/UuidExample
 ```
 ## 示例数据访问二维码
+
+
+## 项目命令
+```
+1. 运行 : npm start
+2. 安装 : npm install
+3.  
+```
