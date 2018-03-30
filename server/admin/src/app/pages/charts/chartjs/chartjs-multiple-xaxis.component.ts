@@ -18,7 +18,6 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
               private dataService: DataService) {
 
     this.dataService.getHeartRate().then(data => {
-      console.log(data);
       this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
         const colors: any = config.variables;
@@ -79,7 +78,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: 'Value',
+                  labelString: '身体数据',
                 },
                 gridLines: {
                   display: true,
@@ -101,7 +100,4 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
     this.themeSubscription.unsubscribe();
   }
 
-  private random() {
-    return Math.round(Math.random() * 100);
-  }
 }
