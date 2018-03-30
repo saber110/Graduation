@@ -74,15 +74,15 @@ static int print_preallocated(cJSON *root)
 /* just get lastest info */
 int _System(const char * cmd, char *pRetMsg, int msg_len)
 {
-  FILE * fp;
-  char * p = NULL;
+  FILE * fp = NULL;
   int res = -1;
   if (cmd == NULL || pRetMsg == NULL || msg_len < 0)
   {
     printf("Param Error!\n");
     return -1;
   }
-  if ((fp = popen(cmd, "r") ) == NULL)
+  fp = popen(cmd, 'r');
+  if (fp == NULL)
   {
     printf("Popen Error!\n");
     return -2;

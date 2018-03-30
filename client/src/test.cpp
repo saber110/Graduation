@@ -3,7 +3,7 @@
 #include "sync.h"
 using namespace std;
 
-int main(int argc, char const *argv[]) {
+int main() {
   NetworkSync sync;
   string Weather = "晴";
   string shijian = "20110809";

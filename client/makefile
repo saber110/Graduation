@@ -1,32 +1,67 @@
+BINFILE = main
 CC = gcc
-
+CXX = g++
 DIR_INC = ./include
-DIR_SRC = ./src
-DIR_OBJ = ./obj
+DIR_SRC = src
+DIR_OBJ = obj
 DIR_BIN = ./bin
+BINTARGET = ${DIR_BIN}/${BINFILE}
+ifdef VERBOSE
+        Q =
+        E = @true
+else
+        Q = @
+        E = @echo
+endif
 
-SRC = $(wildcard ${DIR_SRC}/*.c ${DIR_SRC}/daemon/*.c)
-OBJ = $(patsubst %.c,${DIR_OBJ}/%.o,$(notdir ${SRC}))
+CFILES := $(shell find $(DIR_SRC) -mindepth 1 -maxdepth 4 -name "*.c")
+CXXFILES := $(shell find $(DIR_SRC) -mindepth 1 -maxdepth 4 -name "*.cpp")
+INFILES := $(CFILES) $(CXXFILES)
+OBJFILES := $(CXXFILES:$(DIR_SRC)/%.cpp=%) $(CFILES:$(DIR_SRC)/%.c=%)
+DEPFILES := $(CXXFILES:$(DIR_SRC)/%.cpp=%) $(CFILES:$(DIR_SRC)/%.c=%)
+OFILES := $(OBJFILES:%=$(DIR_OBJ)/%.o)
 
-TARGET = main
+COMMONFLAGS := -Wall -Wextra -pedantic -O3
+DEFINES := -fpic -Wl,-rpath=.
+INCLUDE := -I. -I./include
+LDFLAGS :=
+LIBS    := -lwiringPi -Iusr/include/mysql -lmysqlclient
 
-BIN_TARGET = ${DIR_BIN}/${TARGET}
+ifdef DEBUG
+        COMMONFLAGS := $(COMMONFLAGS) -g
+endif
+CFLAGS := $(COMMONFLAGS) --std=c99 $(DEFINES) $(INCLUDE)
+CXXFLAGS := $(COMMONFLAGS) --std=c++0x $(DEFINES) $(INCLUDE)
+DEPDIR := deps
 
-CFLAGS = -g -O2 -Wall -I${DIR_INC} -lwiringPi -Iusr/include/mysql -lmysqlclient
+all: $(BINTARGET)
+ifeq ($(MAKECMDGOALS),)
+-include Makefile.dep
+endif
+ifneq ($(filter-out clean, $(MAKECMDGOALS)),)
+-include Makefile.dep
+endif
 
-${BIN_TARGET} : ${OBJ}
-	${CC} ${CFLAGS} ${OBJ}  -o $@
+-include Makefile.local
 
-${DIR_OBJ}/%.o : ${DIR_SRC}/%.c
-	$(CC) ${CFLAGS} -c $< -o $@
+.PHONY: clean all depend
+.SUFFIXES:
+obj/%.o: src/%.c
+	$(E) C-compiling $<
+	$(Q) if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(Q)$(CC) -o $@ -c $< $(CFLAGS)
+obj/%.o: src/%.cpp
+	$(E) C++-compiling $<
+	$(Q) if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(Q)$(CXX) -o $@ -c $< $(CXXFLAGS)
+Makefile.dep: $(CFILES) $(CXXFILES)
+	$(E) Depend
+	$(Q) for i in $(^); do $(CXX) $(CXXFLAGS) -MM "$${i}" -MT obj/`basename $${i%.*}`.o; done > $@
 
 
-${DIR_OBJ}/%.o : ${DIR_SRC}/daemon/%.c
-	$(CC) ${CFLAGS} -c $< -o $@
-
-.PHONY : clean run
+$(BINTARGET): $(OFILES)
+	$(E) Linking $@
+	$(Q)$(CXX) -o $@ $(OFILES) $(LDFLAGS) $(LIBS)
 clean:
-	rm -f ${DIR_OBJ}/*.o ${BIN_TARGET}
-
-run:
-	${BIN_TARGET}
+	$(E) Removing files
+	$(Q) rm -f $(BINTARGET) obj/* Makefile.dep

@@ -96,7 +96,6 @@ PI_THREAD(humanCheck)
 
 int main_main(void)
 {
-
 	u8 temp_num=0;
 	u8 temp_num1=0;
 	char Max30102Init = 0;
@@ -121,7 +120,6 @@ int main_main(void)
 	{
 		 loop();
 	}
-
 }
 
 void humanInterrupt(void)
@@ -142,7 +140,6 @@ void interrupt(void)
 	printf("%d\n", Mode);
 	if(Mode & 0x40) //判断新数据到达
 		Key0 = 1;
-
 }
 
 // the loop routine runs over and over again forever:

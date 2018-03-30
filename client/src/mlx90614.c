@@ -271,7 +271,7 @@ void getMLX90614(void)
 
 	data=read_mem(0x00,0x07);
 	tem=data*0.02-273.15;
-	// printf("%d\n",tem);
+	printf("%d\n",tem);
 }
 
 

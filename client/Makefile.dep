@@ -1,0 +1,17 @@
+obj/hcsr501.o: src/hcsr501.c
+obj/mlx90614.o: src/mlx90614.c include/mlx90614.h
+obj/DHT11.o: src/DHT11.c include/DHT11.h
+obj/bsp_i2c_gpio.o: src/bsp_i2c_gpio.c include/bsp_i2c_gpio.h \
+ include/main.h include/main.h
+obj/weather.o: src/weather.c include/cJSON.h include/weather.h
+obj/algorithm.o: src/algorithm.c include/algorithm.h include/main.h \
+ include/main.h
+obj/smartchair.o: src/smartchair.c include/bsp_i2c_gpio.h include/main.h \
+ include/algorithm.h include/max30102.h include/main.h include/DHT11.h \
+ include/mlx90614.h include/weather.h
+obj/cJSON.o: src/cJSON.c include/cJSON.h
+obj/max30102.o: src/max30102.c include/max30102.h include/main.h \
+ include/bsp_i2c_gpio.h include/main.h
+obj/mysql.o: src/mysql.c include/mysqlForLock.h
+obj/test.o: src/test.cpp include/sync.h
+obj/sync.o: src/sync.cpp include/sync.h

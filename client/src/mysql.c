@@ -87,7 +87,7 @@ char * cvpn_mysql_select(MYSQL * conn_ptr, const char *sql){
 									{
 										 rowLength += lengths[a];
 									}
-									mysqlReturn = malloc(rowLength*sizeof(char));
+									mysqlReturn = (char *)malloc(rowLength*sizeof(char));
 									memset(mysqlReturn,0,rowLength*sizeof(char));
 									cvpn_yes = 2;
 							}
@@ -106,7 +106,7 @@ char * cvpn_mysql_select(MYSQL * conn_ptr, const char *sql){
 						return "NULL";			//数据库里没有符合要求的数据
 					}
           if (mysql_errno(conn_ptr)) {
-              fprintf(stderr,"Retrive error:s\n",mysql_error(conn_ptr));
+              fprintf(stderr,"Retrive error:%s\n",mysql_error(conn_ptr));
               return "ERROR";
           }
       }
@@ -140,4 +140,5 @@ int main_mysql()
 	printf("%s\n",cvpn_mysql_select(mysql,"select * from Photo where id = 1"));
 	// printf("%s\n",cvpn_mysql_select(mysql,"select name from test where id = 2"));
 	cvpn_mysql_close(t_mysql);
+	return 0;
 }
