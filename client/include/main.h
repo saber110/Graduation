@@ -28,7 +28,4 @@ extern u8  Bit_Coder_add;//ŒÓ
 extern u8  Bit_Coder_red;//Œõ
 extern u8 dis_data[5];
 
-
-
-
 #endif

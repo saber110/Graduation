@@ -26,5 +26,13 @@ public:
   const char * Weather,
   const char * UsageTime);
 };
-
+int syncMain(
+  const char * uuid,
+  unsigned int HeartRate,
+  unsigned int SpO2,
+  unsigned int Temperature,
+  unsigned int Humidity,
+  const char * Weather,
+  const char * UsageTime
+);
 #endif

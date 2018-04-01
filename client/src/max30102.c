@@ -6,8 +6,8 @@
 #include<wiringPi.h>
 
 #define max30102_WR_address 0xAE
-#define I2C_WR	0		/* ÐŽ¿ØÖÆbit */
-#define I2C_RD	1		/* ¶Á¿ØÖÆbit */
+#define I2C_WR	0
+#define I2C_RD	1
 
 u8 max30102_Bus_Write(u8 Register_Address, u8 Word_Data)
 {
@@ -91,8 +91,8 @@ int maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
     uint8_t uch_temp;
     *pun_ir_led = 0;
     *pun_red_led = 0;
-    uch_temp = max30102_Bus_Read(REG_INTR_STATUS_1);
-    uch_temp = max30102_Bus_Read(REG_INTR_STATUS_2);
+    // uch_temp = max30102_Bus_Read(REG_INTR_STATUS_1);
+    // uch_temp = max30102_Bus_Read(REG_INTR_STATUS_2);
 
     i2c_Start();
 
@@ -157,8 +157,7 @@ int maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
 
     i2c_Stop();
     return true;
-cmd_fail: /* ÃüÁîÖŽÐÐÊ§°Üºó£¬ÇÐŒÇ·¢ËÍÍ£Ö¹ÐÅºÅ£¬±ÜÃâÓ°ÏìI2C×ÜÏßÉÏÆäËûÉè±ž */
-    /* ·¢ËÍI2C×ÜÏßÍ£Ö¹ÐÅºÅ */
+cmd_fail:
     i2c_Stop();
     return false;
 }
@@ -168,25 +167,7 @@ cmd_fail: /* ÃüÁîÖŽÐÐÊ§°Üºó£¬ÇÐŒÇ·¢ËÍÍ£Ö¹ÐÅºÅ£�
 int maxim_max30102_init(void)
 
 {
-	// max30102_Bus_Write(0x09, 0x0b);  //mode configuration : temp_en[3]      MODE[2:0]=010 HR only enabled    011 SP02 enabled
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x01, 0xF0); //open all of interrupt
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(INTERRUPT_REG, 0x00); //all interrupt clear
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x03, 0x02); //DIE_TEMP_RDY_EN
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x21, 0x01); //SET   TEMP_EN
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x0a, 0x47); //SPO2_SR[4:2]=001  100 per second    LED_PW[1:0]=11  16BITS
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x0c, 0x47);
-	// delayMicroseconds(5);
-	// max30102_Bus_Write(0x0d, 0x47);
-	// delayMicroseconds(5);
-
     if(!maxim_max30102_write_reg(REG_INTR_ENABLE_1, 0xd0)) // INTR setting
-		//printf("%d\n",max30102_Bus_Read(REG_INTR_ENABLE_1));
         return false;
 		delayMicroseconds(5);
     if(!maxim_max30102_write_reg(REG_INTR_ENABLE_2, 0x00))
@@ -195,7 +176,6 @@ int maxim_max30102_init(void)
 		printf("%d\n",max30102_Bus_Read(REG_INTR_ENABLE_2));
 		delayMicroseconds(5);
     if(!maxim_max30102_write_reg(REG_FIFO_WR_PTR, 0x00)) //FIFO_WR_PTR[4:0]
-		//printf("%d\n",max30102_Bus_Read(REG_FIFO_WR_PTR));
         return false;
 		delayMicroseconds(5);
     if(!maxim_max30102_write_reg(REG_OVF_COUNTER, 0x00)) //OVF_COUNTER[4:0]

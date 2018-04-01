@@ -83,3 +83,19 @@ int NetworkSync::SendToServer(
   close(fd);
   return 0;
 }
+
+int syncMain(
+    const char * uuid,
+    unsigned int HeartRate,
+    unsigned int SpO2,
+    unsigned int Temperature,
+    unsigned int Humidity,
+    const char * Weather,
+    const char * UsageTime
+)
+{
+  NetworkSync sync;
+  sync.InitConnection();
+  sync.SendToServer(uuid,HeartRate,SpO2,Temperature,Humidity, Weather,shijian);
+  return 0;
+}
