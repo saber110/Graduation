@@ -19,6 +19,7 @@ typedef unsigned int uint32_t;
 #define I2C_RD	1		/* ¶Á¿ØÖÆbit */
 #define human   6
 #define humanCritical 20
+#define uuid UuidExample
 
 extern u16 Already_Rotation_Number;
 extern u8 Bit_Test;

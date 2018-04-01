@@ -256,7 +256,7 @@ begin:
 	return data;
 }
 
-void getMLX90614(void)
+void getMLX90614(int * temperature)
 {
 	int data;
 	int tem;
@@ -270,8 +270,8 @@ void getMLX90614(void)
 	digitalWrite(SCL,1);
 
 	data=read_mem(0x00,0x07);
-	tem=data*0.02-273.15;
-	printf("%d\n",tem);
+	temperature = data*0.02-273.15;
+	printf("%d\n",temperature);
 }
 
 

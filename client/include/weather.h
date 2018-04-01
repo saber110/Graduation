@@ -2,5 +2,5 @@
 #define _WEATHER_H
 
 extern char weatherString[200];
-extern void getWeatherString(char * city);
+extern void getWeatherString(const char * city, char * TypeChar);
 #endif

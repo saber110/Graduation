@@ -10,7 +10,7 @@ typedef unsigned long uint32;
 #define temperature     0
 #define humidity        1
 
-extern int DHT11Result[2];
-extern uint8 readSensorData(void);
-extern void getDHT11Result(void);
+int DHT11Result[2];
+uint8 readSensorData(void);
+void getDHT11Result(int * DHT11Temp, int * Humidity);
 #endif

@@ -1,6 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "bsp_i2c_gpio.h"
 #include "algorithm.h"
 #include "max30102.h"
@@ -8,6 +9,7 @@
 #include "DHT11.h"
 #include "mlx90614.h"
 #include "weather.h"
+#include "sync.h"
 
 #define MAX_BRIGHTNESS 255
 #define DetectedMin 10000
@@ -47,11 +49,18 @@ int32_t SpoAVG_Sum = 0;
 int8_t DataCount = 0;
 int32_t HrData = 0;
 int32_t Spo2Data = 0;
+int32_t HrResult[52] = {0};				// 最终的不受干扰的值,[50]用来存储结果
+int32_t Spo2Result[52] = {0};
 int Avg_counter = 0;
-
+u8 EffNum_count = 0;
+u8 Count_flag = 0;
+u8 Key0 = 0;
+u8 humanCheckNum0 = 0;
+char lock = 0;
 void loop(void);
 void interrupt(void);
 void humanInterrupt(void);
+void getResult(int32_t hr, int32_t Spo2);
 
 void main_init(void)
 {
@@ -59,13 +68,6 @@ void main_init(void)
 	bsp_InitI2C();
 	//delay_init(72);
 }
-
-
-u8 EffNum_count = 0;
-u8 Count_flag = 0;
-u8 Key0 = 0;
-u8 humanCheckNum0 = 0;
-char lock = 0;
 
 PI_THREAD(humanCheck)
 {
@@ -92,6 +94,25 @@ PI_THREAD(humanCheck)
 	}
 }
 
+PI_THREAD(DataSync)
+{
+	int temperature = 0, DHT11Temp = 0, Humidity = 0;
+	char WeatherType[5] = {0};
+	char UsageTime[25] = {0};
+	time_t now ;
+	struct tm *tm_now ;
+
+	getMLX90614(&temperature);
+	getWeatherString("长沙", WeatherType);
+	getDHT11Result(&DHT11Temp, &Humidity);
+	time(&now);
+  tm_now = localtime(&now) ;
+  snprintf(UsageTime, 25 ,"%d-%d-%d %d:%d:%d",
+	tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec) ;
+
+	syncMain(uuid,HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
+}
+
 int main(void)
 {
 	u8 temp_num=0;
@@ -111,7 +132,6 @@ int main(void)
 		Max30102Init = maxim_max30102_init();
 		delayMicroseconds(50);
 	}
-	printf("init %d !\n",Max30102Init);
 	while (!piThreadCreate(humanCheck));
 	printf("init ok !\n");
 	while(1)
@@ -127,9 +147,11 @@ void humanInterrupt(void)
 	if(lock == 0 && humanCheckNum0 > humanCritical)
 	{
 		lock = 1;
-		getMLX90614();
-		getWeatherString("长沙");
-		getDHT11Result();
+		int temperature = 0, DHT11Temp = 0, Humidity = 0;
+		char WeatherType[5] = {0};
+		getMLX90614(&temperature);
+		getWeatherString("长沙", WeatherType);
+		getDHT11Result(&DHT11Temp, &Humidity);
 		lock = 0;
 	}
 }
@@ -490,7 +512,8 @@ void loop(void)
 						printf("0.7spo2Avg = %d\n", spo2Avg*0.7 + spo2Avg_his*0.3);
 						printf("0.8hrAvg = %d   ", hrAvg*0.8 + hrAvg_his*0.2 );
 						printf("0.8spo2Avg = %d\n", spo2Avg*0.8 + spo2Avg_his*0.2);
-						printf("键入回车继续运行");
+						printf("键入回车继续运行,请挑选合适的参数");
+						getResult(hrAvg, spo2Avg);
 						getchar();
 						hrAvg_his = hrAvg;
 						spo2Avg_his = spo2Avg;
@@ -518,4 +541,42 @@ void loop(void)
 			}
 		}
 	}
+}
+// 结果滤波并产生永恒记录值[50]
+void getResult(int32_t hr, int32_t Spo2)
+{
+	static int count = 0;
+	static int32_t Hrmin = 0x3FFFF, Hrmax = 0;
+	static int32_t Spo2min = 0x3FFFF, Spo2max = 0;
+
+	HrResult[count]   = hr;
+	// 记录最值下标
+	if(Hrmin > HrResult[count]) Hrmin = count;
+	if(Hrmax < HrResult[count]) Hrmax = count;
+
+	Spo2Result[count] = Spo2;
+	if(Spo2min > Spo2Result[count]) Spo2min = count;
+	if(Spo2max < Spo2Result[count]) Spo2max = count;
+	if(count >= 49)
+	{
+		// 去掉一个最大值去掉一个最小值，其余的求平均
+		HrResult[Hrmin] = HrResult[Hrmax] = 0;
+		Spo2Result[Spo2min] = Spo2Result[Spo2max] = 0;
+		for(int i = 0; i < 50; i++)
+		{
+			HrResult[51] += HrResult[i];
+			Spo2Result[51] += Spo2Result[i];
+		}
+		HrResult[50] = HrResult[51] / 48;
+		Spo2Result[50] = Spo2Result[51] / 48;
+
+
+		HrResult[51] = Spo2Result[51] = 0;
+		Hrmin = 0x3FFFF; Hrmax = 0;
+		Spo2min = 0x3FFFF; Spo2max = 0;
+		count = 0;
+
+		while (!piThreadCreate(DataSync));
+	}
+	count ++;
 }

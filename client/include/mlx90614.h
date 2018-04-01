@@ -23,6 +23,6 @@ u16 SMBus_ReadMemory(u8, u8);
 u8 PEC_Calculation(u8*);
 float SMBus_ReadTemp(void);
 
-void getMLX90614(void);
+void getMLX90614(int * temperature);
 
 #endif

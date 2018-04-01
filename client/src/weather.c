@@ -106,14 +106,15 @@ int _System(const char * cmd, char *pRetMsg, int msg_len)
   }
 }
 
-void getWeatherString(char * city)
+void getWeatherString(const char * city, char * TypeChar)
 {
   char command[100] = {0};
-  snprintf(command,sizeof(command),"%s%s","w3m -dump http://wthrcdn.etouch.cn/weather_mini?city=", city);
   char a8Result[2048];
   int ret = 0;
   cJSON * weather[5] = {0};
 
+  memset(TypeChar, 0, sizeof(TypeChar));
+  snprintf(command,sizeof(command),"%s%s","w3m -dump http://wthrcdn.etouch.cn/weather_mini?city=", city);
   ret = _System(command, a8Result, sizeof(a8Result));
   // printf("a8Result = %s\nlength = %d \n", a8Result, (int)strlen(a8Result));
   cJSON * root = cJSON_Parse(a8Result);
@@ -133,6 +134,7 @@ void getWeatherString(char * city)
   char * typeChar = cJSON_Print(type);
 
   // print_preallocated(weather[0]);
+  strcpy_s(TypeChar, strlen(typeChar), typeChar);
   snprintf(weatherString,sizeof(weatherString),"%s %s%s,%s,%s,%s","espeak -vzh","您好，现在为您播报天气，今天",typeChar,lowChar,highChar,"请注意增减衣物");
   // system(weatherString);
   printf("%s\n", weatherString);
