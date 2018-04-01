@@ -39,4 +39,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 mysql/mysqlconfig.py
 ## npm modules
 server/admin/node_modules
-/new/
+new/
