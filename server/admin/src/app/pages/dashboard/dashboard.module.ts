@@ -20,7 +20,7 @@ import { SolarComponent } from './solar/solar.component';
 import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
-
+import { SecurityCamerasComponent } from './security-cameras/security-cameras.component';
 import { ChartjsMultipleXaxisComponent } from '../charts/chartjs/chartjs-multiple-xaxis.component';
 
 @NgModule({
@@ -43,6 +43,7 @@ import { ChartjsMultipleXaxisComponent } from '../charts/chartjs/chartjs-multipl
     ElectricityComponent,
     ElectricityChartComponent,
     ChartjsMultipleXaxisComponent,
+    SecurityCamerasComponent,
     WeatherComponent,
     PlayerComponent,
     SolarComponent,

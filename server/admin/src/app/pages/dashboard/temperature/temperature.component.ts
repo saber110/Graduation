@@ -22,8 +22,8 @@ export class TemperatureComponent implements OnDestroy {
 
   constructor(private theme: NbThemeService,
               private dataService: DataService) {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-      this.colors = config.variables;
+                this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+                this.colors = config.variables;
     });
   }
 

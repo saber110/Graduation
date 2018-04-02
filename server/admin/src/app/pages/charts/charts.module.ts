@@ -4,12 +4,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
 
 import { ThemeModule } from '../../@theme/theme.module';
-
 import { ChartsRoutingModule, routedComponents } from './charts-routing.module';
 import { ChartjsBarComponent } from './chartjs/chartjs-bar.component';
 import { ChartjsLineComponent } from './chartjs/chartjs-line.component';
 import { ChartjsPieComponent } from './chartjs/chartjs-pie.component';
-import { ChartjsMultipleXaxisComponent } from './chartjs/chartjs-multiple-xaxis.component';
+// import { ChartjsMultipleXaxisComponent } from './chartjs/chartjs-multiple-xaxis.component';
 import { ChartjsBarHorizontalComponent } from './chartjs/chartjs-bar-horizontal.component';
 import { ChartjsRadarComponent } from './chartjs/chartjs-radar.component';
 import { D3BarComponent } from './d3/d3-bar.component';
@@ -30,7 +29,7 @@ const components = [
   ChartjsBarComponent,
   ChartjsLineComponent,
   ChartjsPieComponent,
-  ChartjsMultipleXaxisComponent,
+  // ChartjsMultipleXaxisComponent,
   ChartjsBarHorizontalComponent,
   ChartjsRadarComponent,
   D3BarComponent,
@@ -51,5 +50,6 @@ const components = [
 @NgModule({
   imports: [ThemeModule, ChartsRoutingModule, AngularEchartsModule, NgxChartsModule, ChartModule],
   declarations: [...routedComponents, ...components],
+  // exports:[ChartjsMultipleXaxisComponent]
 })
 export class ChartsModule {}

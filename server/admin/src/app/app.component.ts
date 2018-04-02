@@ -13,7 +13,6 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 })
 export class AppComponent implements OnInit {
   private uuid;
-
   // 从url字符串提取uuid
   //http://127.0.0.1:4200/#/pages/dashboard/UuidExample
   constructor(private analytics: AnalyticsService,
@@ -22,6 +21,7 @@ export class AppComponent implements OnInit {
     var url = location.path().match(partten);
     // console.log(url[0]);
     this.uuid = url[0];
+    // this.uuid = "UuidExample";
   }
 
   getUuid(){

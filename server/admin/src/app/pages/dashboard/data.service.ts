@@ -1,4 +1,4 @@
-import { Headers, Http } from '@angular/http';
+import { Http,Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
 import { AppComponent } from '../../app.component'
@@ -7,44 +7,45 @@ import { AppComponent } from '../../app.component'
 export class DataService {
 
   private uuid = 'UuidExample';
-  // private headers = new Headers({'Content-Type': 'application/json'});
+  private Host = "http://127.0.0.1:7777";
 
   constructor(private http: Http,
               private app: AppComponent,) {
+
     console.log(app.getUuid());
     this.uuid = app.getUuid();
   }
 
   getTemperature() {
-    return this.http.get('/api/temperature/' + this.uuid)
+    return this.http.get(this.Host + '/api/temperature/' + this.uuid)
              .toPromise()
              .then(function(response){ return response.json(); })
              .catch(this.handleError);
   }
 
   getHumidity() {
-    return this.http.get('/api/humidity/' + this.uuid)
+    return this.http.get(this.Host + '/api/humidity/' + this.uuid)
              .toPromise()
              .then(function(response){return response.json(); })
              .catch(this.handleError);
   }
 
   getHeartRate() {
-    return this.http.get('/api/heartRate/' + this.uuid)
+    return this.http.get(this.Host + '/api/heartRate/' + this.uuid)
              .toPromise()
              .then(function(response){return response.json(); })
              .catch(this.handleError);
   }
 
   getSoup() {
-    return this.http.get('/api/getsoup')
+    return this.http.get(this.Host + '/api/getsoup')
              .toPromise()
              .then(function(response){return response.json(); })
              .catch(this.handleError);
   }
 
   getWeather() {
-    return this.http.get('/api/getweather')
+    return this.http.get(this.Host + '/api/getweather')
              .toPromise()
              .then(function(response){return response.json(); })
              .catch(this.handleError);

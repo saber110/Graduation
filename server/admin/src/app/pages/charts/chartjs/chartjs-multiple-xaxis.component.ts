@@ -99,5 +99,4 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
-
 }
