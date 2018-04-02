@@ -40,3 +40,4 @@ mysql/mysqlconfig.py
 ## npm modules
 server/admin/node_modules
 new/
+*mysqlconfig.py
