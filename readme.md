@@ -47,13 +47,13 @@ http://123.206.64.174/dist/#/pages/dashboard/UuidExample
 ```
 ## 示例数据访问二维码
 1. 本地
-<div class = "center">
+
   ![示例](server/admin/config/QRcode.png)
-</div>
+
 2. 服务器
-<div class = "center">
+
   ![服务器](server/admin/config/serverQrcode.png)
-</div>
+
 
 ## 项目命令
 ```
