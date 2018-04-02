@@ -2,7 +2,7 @@
 #define _SYNC_H_
 #include <netinet/in.h>
 
-#define SERVER_ADDR "192.168.43.26"
+#define SERVER_ADDR "123.206.64.174"
 #define DATAIN_ADDR "/api/DataSync/"
 #define PORT "7777"
 #define MSGSIZE 1024  //收发缓冲区的大小

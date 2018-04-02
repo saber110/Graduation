@@ -36,14 +36,26 @@ db.1
 
 ## 访问地址
 ```
+http://123.206.64.174:4200/#/pages/dashboard/uuid
 http://127.0.0.1:4200/#/pages/dashboard/uuid
+
 ```
 例如
 ```
 http://127.0.0.1:4200/#/pages/dashboard/UuidExample
+http://123.206.64.174:4200/#/pages/dashboard/UuidExample
 ```
 ## 示例数据访问二维码
-![示例](server/admin/config/QRcode.png)
+1. 本地
+
+<div class = "center">
+  ![示例](server/admin/config/QRcode.png)
+</div>
+2. 服务器
+
+<div class = "center">
+  ![服务器](server/admin/config/serverQrcode.png)
+</div>
 ## 项目命令
 ```
 1. 运行 : npm start
@@ -51,4 +63,4 @@ http://127.0.0.1:4200/#/pages/dashboard/UuidExample
 ```
 
 ## 注意
-1. 启动工程请用su权限
+1. 启动C工程请用su权限
