@@ -25,8 +25,7 @@
 	- pin 7 : SCL
 	- pin 0 : SDA
 4. MOTOR
-	- pin 25 : pwm1
-	- pin 29 : pwm2
+	- pin 1 : pwm
 5. hcsr501
 	- pin 6  : hcsr501
 
