@@ -93,7 +93,7 @@ public:
   }
 };
 
-extern int syncMain(
+int syncMain(
     const char * uuid,
     unsigned int HeartRate,
     unsigned int SpO2,

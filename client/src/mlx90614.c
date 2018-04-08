@@ -112,7 +112,7 @@ unsigned char read_byte(unsigned char ack)
 
 }
 //PEC�ļ���
-unsigned char PEC_cal(unsigned char a[],char n)
+unsigned char PEC_cal(unsigned char a[])
 {
 	unsigned char crc[6];
 	char Bitposition=47;
@@ -246,7 +246,7 @@ begin:
 	a[1]=Data_H;
 	a[0]=0;
 //printf("5\n");
-	pecreg=PEC_cal(a,6);
+	pecreg=PEC_cal(a);
 	//printf("%d\n",pecreg);
 }while(PEC!=pecreg);
 
@@ -259,7 +259,6 @@ begin:
 void getMLX90614(int * temperature)
 {
 	int data;
-	int tem;
 	pinMode(SCL,OUTPUT);
 	pinMode(SDA,OUTPUT);
 	digitalWrite(SDA,1);
@@ -271,7 +270,6 @@ void getMLX90614(int * temperature)
 
 	data=read_mem(0x00,0x07);
 	*temperature = data*0.02-273.15;
-	printf("%d\n",temperature);
 }
 
 

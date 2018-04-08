@@ -31,14 +31,14 @@ uint8 readSensorData(void)
 
       for(i=0;i<32;i++)
        {
-       while(digitalRead(pinNumber)); //data clock start
-       while(!digitalRead(pinNumber)); //data start
+          while(digitalRead(pinNumber)); //data clock start
+          while(!digitalRead(pinNumber)); //data start
           delayMicroseconds(HIGH_TIME);
           databuf*=2;
-           if(digitalRead(pinNumber)==1) //1
-            {
-                databuf++;
-            }
+          if(digitalRead(pinNumber)==1) //1
+          {
+              databuf++;
+          }
         }
 
       for(i=0;i<8;i++)

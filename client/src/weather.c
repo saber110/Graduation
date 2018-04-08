@@ -110,12 +110,11 @@ void getWeatherString(const char * city, char * TypeChar)
 {
   char command[100] = {0};
   char a8Result[2048];
-  int ret = 0;
   cJSON * weather[5] = {0};
 
-  memset(TypeChar, 0, sizeof(TypeChar));
+  memset(TypeChar, 0, strlen(TypeChar));
   snprintf(command,sizeof(command),"%s%s","w3m -dump http://wthrcdn.etouch.cn/weather_mini?city=", city);
-  ret = _System(command, a8Result, sizeof(a8Result));
+  _System(command, a8Result, sizeof(a8Result));
   // printf("a8Result = %s\nlength = %d \n", a8Result, (int)strlen(a8Result));
   cJSON * root = cJSON_Parse(a8Result);
   cJSON * data = cJSON_GetObjectItemCaseSensitive(root, "data");

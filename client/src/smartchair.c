@@ -76,7 +76,7 @@ PI_THREAD(humanCheck)
 	digitalWrite(human,0);
 	pinMode(human,INPUT);
 	pullUpDnControl(human,PUD_DOWN);
-	while(wiringPiISR(human,INT_EDGE_FALLING,humanInterrupt) < 0);
+	// while(wiringPiISR(human,INT_EDGE_FALLING,humanInterrupt) < 0);
 	while(1)
 	{
 		u8 i = digitalRead(human);
@@ -94,7 +94,7 @@ PI_THREAD(humanCheck)
 	}
 }
 
-PI_THREAD(DataSync)
+void DataSync(void)
 {
 	int temperature = 0, DHT11Temp = 0, Humidity = 0;
 	char WeatherType[5] = {0};
@@ -103,22 +103,19 @@ PI_THREAD(DataSync)
 	struct tm *tm_now ;
 
 	// getMLX90614(&temperature);
-	// getWeatherString("长沙", WeatherType);
+	getWeatherString("长沙", WeatherType);
 	// getDHT11Result(&DHT11Temp, &Humidity);
 	time(&now);
   tm_now = localtime(&now) ;
-  snprintf(UsageTime, 25 ,"%d-%d-%d %d:%d:%d",
+  snprintf(UsageTime, 25 ,"%d-%d-%d|%d:%d:%d",
 	tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec) ;
-
+	printf("%s\n", UsageTime);
 	syncMain("UuidExample",HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
 }
 
 int main(void)
 {
-	u8 temp_num=0;
-	u8 temp_num1=0;
 	char Max30102Init = 0;
-	int32_t i;int j = 0;
   n_ir_buffer_length = 150;
 	wiringPiSetup();
 	main_init();
@@ -148,11 +145,10 @@ void humanInterrupt(void)
 	if(lock == 0 && humanCheckNum0 > humanCritical)
 	{
 		lock = 1;
-
-		// char WeatherType[5] = {0};
-		// getMLX90614(&temperature);
-		// getWeatherString("长沙", WeatherType);
-		// getDHT11Result(&DHT11Temp, &Humidity);
+		char WeatherType[5] = {0};
+		getMLX90614(&temperature);
+		getWeatherString("长沙", WeatherType);
+		getDHT11Result(&DHT11Temp, &Humidity);
 		lock = 0;
 	}
 }
@@ -162,9 +158,11 @@ void humanInterrupt(void)
 void interrupt(void)
 {
 	u8 Mode = max30102_Bus_Read(REG_INTR_STATUS_1);
-	printf("%d\n", Mode);
+	// printf("%d\n", Mode);
 	if(Mode & 0x40) //判断新数据到达
+	{
 		Key0 = 1;
+	}
 }
 
 // the loop routine runs over and over again forever:
@@ -501,21 +499,20 @@ void loop(void)
 
 					if(hrAvg_his != 0 && spo2Avg_his != 0 )
 					{
-						hrAvg = hrAvg*0.2 + hrAvg_his*0.8;
-						spo2Avg = spo2Avg*0.2 + spo2Avg_his*0.8;
-						printf("hrAvg = %d   ", hrAvg );
-						printf("spo2Avg = %d\n", spo2Avg);
-						printf("0.5hrAvg = %d   ", hrAvg*0.5 + hrAvg_his*0.5 );
-						printf("0.5spo2Avg = %d\n", spo2Avg*0.5 + spo2Avg_his*0.5);
-						printf("0.6hrAvg = %d   ", hrAvg*0.6 + hrAvg_his*0.4 );
-						printf("0.6spo2Avg = %d\n", spo2Avg*0.6 + spo2Avg_his*0.4);
-						printf("0.7hrAvg = %d   ", hrAvg*0.7 + hrAvg_his*0.3 );
-						printf("0.7spo2Avg = %d\n", spo2Avg*0.7 + spo2Avg_his*0.3);
-						printf("0.8hrAvg = %d   ", hrAvg*0.8 + hrAvg_his*0.2 );
-						printf("0.8spo2Avg = %d\n", spo2Avg*0.8 + spo2Avg_his*0.2);
-						printf("键入回车继续运行,请挑选合适的参数");
+						// hrAvg = hrAvg*0.2 + hrAvg_his*0.8;
+						// spo2Avg = spo2Avg*0.2 + spo2Avg_his*0.8;
+						// printf("hrAvg = %d   ", hrAvg );
+						// printf("spo2Avg = %d\n", spo2Avg);
+						// printf("0.5hrAvg = %d   ", (int)(hrAvg*0.5 + hrAvg_his*0.5) );
+						// printf("0.5spo2Avg = %d\n", (int)(spo2Avg*0.5 + spo2Avg_his*0.5));
+						// printf("0.6hrAvg = %d   ", (int)(hrAvg*0.6 + hrAvg_his*0.4 ));
+						// printf("0.6spo2Avg = %d\n", (int)(spo2Avg*0.6 + spo2Avg_his*0.4));
+						// printf("0.7hrAvg = %d   ", (int)(hrAvg*0.7 + hrAvg_his*0.3 ));
+						// printf("0.7spo2Avg = %d\n", (int)(spo2Avg*0.7 + spo2Avg_his*0.3));
+						// printf("0.8hrAvg = %d   ", (int)(hrAvg*0.8 + hrAvg_his*0.2 ));
+						// printf("0.8spo2Avg = %d\n", (int)(spo2Avg*0.8 + spo2Avg_his*0.2));
+						// printf("键入回车继续运行,请挑选合适的参数\n");
 						getResult(hrAvg, spo2Avg);
-						getchar();
 						hrAvg_his = hrAvg;
 						spo2Avg_his = spo2Avg;
 						//进一步滤波
@@ -549,7 +546,7 @@ void getResult(int32_t hr, int32_t Spo2)
 	static int count = 0;
 	static int32_t Hrmin = 0x3FFFF, Hrmax = 0;
 	static int32_t Spo2min = 0x3FFFF, Spo2max = 0;
-
+	int num0inResult = 0;
 	HrResult[count]   = hr;
 	// 记录最值下标
 	if(Hrmin > HrResult[count]) Hrmin = count;
@@ -567,9 +564,14 @@ void getResult(int32_t hr, int32_t Spo2)
 		{
 			HrResult[51] += HrResult[i];
 			Spo2Result[51] += Spo2Result[i];
+			if(Spo2Result[i] == 0)
+				num0inResult ++;
 		}
-		HrResult[50] = HrResult[51] / 48;
-		Spo2Result[50] = Spo2Result[51] / 48;
+
+
+		printf("num0inResult: %d\n",num0inResult);
+		HrResult[50] = HrResult[51] / 47;
+		Spo2Result[50] = Spo2Result[51] / 47;
 
 
 		HrResult[51] = Spo2Result[51] = 0;
@@ -577,7 +579,7 @@ void getResult(int32_t hr, int32_t Spo2)
 		Spo2min = 0x3FFFF; Spo2max = 0;
 		count = 0;
 
-		while (!piThreadCreate(DataSync));
+		DataSync();
 	}
 	count ++;
 }

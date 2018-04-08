@@ -7,7 +7,7 @@
 #define PORT "7777"
 #define MSGSIZE 1024  //收发缓冲区的大小
 
-extern int syncMain(
+int syncMain(
   const char * uuid,
   unsigned int HeartRate,
   unsigned int SpO2,

@@ -1,6 +1,5 @@
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
-
 #include "main.h"
 
 #define true 1

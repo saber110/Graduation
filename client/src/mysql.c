@@ -16,6 +16,7 @@ MYSQL_RES *res;
 MYSQL_ROW row;
 unsigned long *lengths;
 char * mysqlReturn = NULL;
+char None[] = "NULL", Failure[] = "ERROR";
 
 // 准备mysql环境
 
@@ -103,11 +104,11 @@ char * cvpn_mysql_select(MYSQL * conn_ptr, const char *sql){
           }
 					if(validation == 0)
 					{
-						return "NULL";			//数据库里没有符合要求的数据
+						return None;			//数据库里没有符合要求的数据
 					}
           if (mysql_errno(conn_ptr)) {
               fprintf(stderr,"Retrive error:%s\n",mysql_error(conn_ptr));
-              return "ERROR";
+              return Failure;
           }
       }
       mysql_free_result(res_ptr);

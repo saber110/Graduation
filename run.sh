@@ -7,4 +7,4 @@ path=$(cd `dirname $0`; pwd)
 
 # run python
 cd $path/server
-python hello.py &
+python Graduation.py &
