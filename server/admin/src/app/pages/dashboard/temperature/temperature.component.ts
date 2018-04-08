@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
 })
 export class TemperatureComponent implements OnDestroy {
 
-  temperature = 48;
+  temperature = 20;
   temperatureOff = false;
   temperatureMode = 'cool';
 

@@ -17,13 +17,14 @@
 采用树莓派的 wPi 引脚编码
 ```
 1. DHT11
-	- pin 1 : Data
+	- pin 25 : Data
 2. MLX90614
 	- pin 27 : SDA
 	- pin 28 : SCL
 3. MAX30102
 	- pin 7 : SCL
 	- pin 0 : SDA
+	- pin x : INT
 4. MOTOR
 	- pin 1 : pwm
 5. hcsr501

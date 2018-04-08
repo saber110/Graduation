@@ -1,5 +1,5 @@
 BINFILE = main
-CC = gcc
+CC = g++
 CXX = g++
 DIR_INC = ./include
 DIR_SRC = src
@@ -30,7 +30,7 @@ LIBS    := -lwiringPi -Iusr/include/mysql -lmysqlclient
 ifdef DEBUG
         COMMONFLAGS := $(COMMONFLAGS) -g
 endif
-CFLAGS := $(COMMONFLAGS) --std=c99 $(DEFINES) $(INCLUDE)
+CFLAGS := $(COMMONFLAGS)  $(DEFINES) $(INCLUDE)
 CXXFLAGS := $(COMMONFLAGS) --std=c++0x $(DEFINES) $(INCLUDE)
 DEPDIR := deps
 

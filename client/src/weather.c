@@ -81,7 +81,7 @@ int _System(const char * cmd, char *pRetMsg, int msg_len)
     printf("Param Error!\n");
     return -1;
   }
-  fp = popen(cmd, 'r');
+  fp = popen(cmd, "r");
   if (fp == NULL)
   {
     printf("Popen Error!\n");
@@ -134,7 +134,8 @@ void getWeatherString(const char * city, char * TypeChar)
   char * typeChar = cJSON_Print(type);
 
   // print_preallocated(weather[0]);
-  strcpy_s(TypeChar, strlen(typeChar), typeChar);
+  strncpy(TypeChar, typeChar,strlen(typeChar));
+  TypeChar[strlen(typeChar)-1] = '\0';
   snprintf(weatherString,sizeof(weatherString),"%s %s%s,%s,%s,%s","espeak -vzh","您好，现在为您播报天气，今天",typeChar,lowChar,highChar,"请注意增减衣物");
   // system(weatherString);
   printf("%s\n", weatherString);

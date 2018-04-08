@@ -102,15 +102,15 @@ PI_THREAD(DataSync)
 	time_t now ;
 	struct tm *tm_now ;
 
-	getMLX90614(&temperature);
-	getWeatherString("长沙", WeatherType);
-	getDHT11Result(&DHT11Temp, &Humidity);
+	// getMLX90614(&temperature);
+	// getWeatherString("长沙", WeatherType);
+	// getDHT11Result(&DHT11Temp, &Humidity);
 	time(&now);
   tm_now = localtime(&now) ;
   snprintf(UsageTime, 25 ,"%d-%d-%d %d:%d:%d",
 	tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec) ;
 
-	syncMain(uuid,HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
+	syncMain("UuidExample",HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
 }
 
 int main(void)
@@ -143,15 +143,16 @@ int main(void)
 
 void humanInterrupt(void)
 {
+	int temperature = 0, DHT11Temp = 0, Humidity = 0;
 	printf("humanCheckNum0 %d\n",humanCheckNum0);
 	if(lock == 0 && humanCheckNum0 > humanCritical)
 	{
 		lock = 1;
-		int temperature = 0, DHT11Temp = 0, Humidity = 0;
-		char WeatherType[5] = {0};
-		getMLX90614(&temperature);
-		getWeatherString("长沙", WeatherType);
-		getDHT11Result(&DHT11Temp, &Humidity);
+
+		// char WeatherType[5] = {0};
+		// getMLX90614(&temperature);
+		// getWeatherString("长沙", WeatherType);
+		// getDHT11Result(&DHT11Temp, &Humidity);
 		lock = 0;
 	}
 }

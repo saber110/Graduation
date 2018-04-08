@@ -7,10 +7,9 @@ typedef unsigned long uint32;
 
 #define HIGH_TIME       32
 #define pinNumber       1  //use gpio1 to read data
-#define temperature     0
-#define humidity        1
+#define TEMPERATURE     0
+#define HUMIDITY        1
 
-int DHT11Result[2];
 uint8 readSensorData(void);
 void getDHT11Result(int * DHT11Temp, int * Humidity);
 #endif

@@ -270,7 +270,7 @@ void getMLX90614(int * temperature)
 	digitalWrite(SCL,1);
 
 	data=read_mem(0x00,0x07);
-	temperature = data*0.02-273.15;
+	*temperature = data*0.02-273.15;
 	printf("%d\n",temperature);
 }
 

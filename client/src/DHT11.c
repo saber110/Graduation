@@ -63,14 +63,14 @@ uint8 readSensorData(void)
 void getDHT11Result(int * DHT11Temp, int * Humidity)
 {
   char command[200] = {0};
-  int
   init();
   while(readSensorData() == 0);
-  DHT11Result[humidity]    = (databuf>>24)&0xff;
-  DHT11Result[temperature] = (databuf>>8)&0xff;  //只取整数部分
-  DHT11Temp = DHT11Result[temperature];
-  humidity  = DHT11Result[humidity];
-  snprintf(command,sizeof(command),"%s %s:%d。%s:%d","espeak -vzh", "现在的室内温度为", DHT11Result[temperature],"现在的室内湿度为", DHT11Result[humidity]);
+  DHT11Result[HUMIDITY]    = (databuf>>24)&0xff;
+  DHT11Result[TEMPERATURE] = (databuf>>8)&0xff;  //只取整数部分
+  databuf = 0;
+  *DHT11Temp = DHT11Result[TEMPERATURE];
+  *Humidity  = DHT11Result[HUMIDITY];
+  snprintf(command,sizeof(command),"%s %s:%d。%s:%d","espeak -vzh", "现在的室内温度为", DHT11Result[TEMPERATURE],"现在的室内湿度为", DHT11Result[HUMIDITY]);
   printf("%s\n", command);
   system(command);
 }
