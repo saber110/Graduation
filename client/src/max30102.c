@@ -88,11 +88,10 @@ cmd_fail:
 int maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
 {
     uint32_t un_temp;
-    uint8_t uch_temp;
     *pun_ir_led = 0;
     *pun_red_led = 0;
-    // uch_temp = max30102_Bus_Read(REG_INTR_STATUS_1);
-    // uch_temp = max30102_Bus_Read(REG_INTR_STATUS_2);
+		max30102_Bus_Read(REG_INTR_STATUS_1);
+    max30102_Bus_Read(REG_INTR_STATUS_2);
 
     i2c_Start();
 
