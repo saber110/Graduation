@@ -1,16 +1,16 @@
 BIN = cmdparse
 CC = g++
 
-LIBS    := -lwiringPi
-INCLUDE := -I.
-OBJS    := motor.o server.o
-CFLAGS = -g -O2 -Wall ${INCLUDE} ${LIBS}
+LIBS   = -lwiringPi
+OBJS   = motor.o server.o
+CFLAGS = -c ${LIBS}
 
-motor.o: motor.cpp
-	${CC} ${CFLAGS} motor.cpp
-
-${cmdparse}: motor.o
-	${CC} ${CFLAGS} server.cpp
+${BIN} : server.o motor.o
+	${CC} server.o motor.o ${LIBS} -o ${BIN}
+server.o : server.cpp motor.h server.h
+	${CC} server.cpp ${CFLAGS}
+motor.o : motor.cpp motor.h
+	${CC} motor.cpp ${CFLAGS}
 
 clean:
-	rm *.o cmdparse
+	rm *.o ${BIN}

@@ -52,11 +52,9 @@ int main()
         }
         Motion(client_fd, buff);
         printf("received a connection from %s:%u\n", inet_ntoa(remote_addr.sin_addr), ntohs(remote_addr.sin_port));
-        if(!fork()) {   // 子进程代码段
-            Responce(client_fd, "success");
-            close(client_fd);
-            exit(0);
-        }
+
+        Responce(client_fd, "success\r\n");
+
         close(client_fd);
     }
     return 0;
@@ -72,7 +70,7 @@ void Motion(int sock_fd, char *buff)
 {
   read(sock_fd, buff, MAXDATASIZE);
   // 截取接口参数
-  if(!strncmp(buff, "GET /", 5))
+  if(!strncmp(buff, "GET", 3))
   {
     char *param = buff + 5;
     char *space = strchr(param, ' ');
