@@ -76,7 +76,7 @@ PI_THREAD(humanCheck)
 	digitalWrite(human,0);
 	pinMode(human,INPUT);
 	pullUpDnControl(human,PUD_DOWN);
-	// while(wiringPiISR(human,INT_EDGE_FALLING,humanInterrupt) < 0);
+	while(wiringPiISR(human,INT_EDGE_FALLING,humanInterrupt) < 0);
 	while(1)
 	{
 		u8 i = digitalRead(human);
@@ -499,39 +499,9 @@ void loop(void)
 
 					if(hrAvg_his != 0 && spo2Avg_his != 0 )
 					{
-						// hrAvg = hrAvg*0.2 + hrAvg_his*0.8;
-						// spo2Avg = spo2Avg*0.2 + spo2Avg_his*0.8;
-						// printf("hrAvg = %d   ", hrAvg );
-						// printf("spo2Avg = %d\n", spo2Avg);
-						// printf("0.5hrAvg = %d   ", (int)(hrAvg*0.5 + hrAvg_his*0.5) );
-						// printf("0.5spo2Avg = %d\n", (int)(spo2Avg*0.5 + spo2Avg_his*0.5));
-						// printf("0.6hrAvg = %d   ", (int)(hrAvg*0.6 + hrAvg_his*0.4 ));
-						// printf("0.6spo2Avg = %d\n", (int)(spo2Avg*0.6 + spo2Avg_his*0.4));
-						// printf("0.7hrAvg = %d   ", (int)(hrAvg*0.7 + hrAvg_his*0.3 ));
-						// printf("0.7spo2Avg = %d\n", (int)(spo2Avg*0.7 + spo2Avg_his*0.3));
-						// printf("0.8hrAvg = %d   ", (int)(hrAvg*0.8 + hrAvg_his*0.2 ));
-						// printf("0.8spo2Avg = %d\n", (int)(spo2Avg*0.8 + spo2Avg_his*0.2));
-						// printf("键入回车继续运行,请挑选合适的参数\n");
 						getResult(hrAvg, spo2Avg);
 						hrAvg_his = hrAvg;
 						spo2Avg_his = spo2Avg;
-						//进一步滤波
-						// if(DataCount < 20)
-						// {
-						// HrArg_Sum += hrAvg;
-						// SpoAVG_Sum	+= spo2Avg;
-						// DataCount ++;
-						// }
-						// else
-						// {
-						// 	HrData = HrArg_Sum/20;
-						// 	Spo2Data = SpoAVG_Sum/20;
-						// 	//printf("hrAvgD = %d   ", HrData );
-						// 	//printf("spo2AvgD = %d\n", Spo2Data);
-						// 	HrArg_Sum = 0;
-						// 	SpoAVG_Sum = 0;
-						// 	DataCount = 0;
-						// }
 					}
 				}
 				else
@@ -546,7 +516,6 @@ void getResult(int32_t hr, int32_t Spo2)
 	static int count = 0;
 	static int32_t Hrmin = 0x3FFFF, Hrmax = 0;
 	static int32_t Spo2min = 0x3FFFF, Spo2max = 0;
-	int num0inResult = 0;
 	HrResult[count]   = hr;
 	// 记录最值下标
 	if(Hrmin > HrResult[count]) Hrmin = count;
@@ -564,15 +533,10 @@ void getResult(int32_t hr, int32_t Spo2)
 		{
 			HrResult[51] += HrResult[i];
 			Spo2Result[51] += Spo2Result[i];
-			if(Spo2Result[i] == 0)
-				num0inResult ++;
 		}
 
-
-		printf("num0inResult: %d\n",num0inResult);
-		HrResult[50] = HrResult[51] / 47;
-		Spo2Result[50] = Spo2Result[51] / 47;
-
+		HrResult[50] = HrResult[51] / 46;
+		Spo2Result[50] = Spo2Result[51] / 46;
 
 		HrResult[51] = Spo2Result[51] = 0;
 		Hrmin = 0x3FFFF; Hrmax = 0;

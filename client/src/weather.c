@@ -137,7 +137,6 @@ void getWeatherString(const char * city, char * TypeChar)
   TypeChar[strlen(typeChar)-1] = '\0';
   snprintf(weatherString,sizeof(weatherString),"%s %s%s,%s,%s,%s","espeak -vzh","您好，现在为您播报天气，今天",typeChar,lowChar,highChar,"请注意增减衣物");
   // system(weatherString);
-  printf("%s\n", weatherString);
 
   free(highChar);
   free(lowChar);
