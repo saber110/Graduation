@@ -58,7 +58,6 @@ Makefile.dep: $(CFILES) $(CXXFILES)
 	$(E) Depend
 	$(Q) for i in $(^); do $(CXX) $(CXXFLAGS) -MM "$${i}" -MT obj/`basename $${i%.*}`.o; done > $@
 
-
 $(BINTARGET): $(OFILES)
 	$(E) Linking $@
 	$(Q)$(CXX) -o $@ $(OFILES) $(LDFLAGS) $(LIBS)
