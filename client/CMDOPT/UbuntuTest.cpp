@@ -9,7 +9,6 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "server.h"
-#include "motor.h"
 
 const static char http_html_hdr[] = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\nAccess-Control-Allow-Origin: *\r\n\r\n";
 using namespace std;
@@ -21,8 +20,6 @@ int main()
     char buff[MAXDATASIZE] = {0};
     struct sockaddr_in my_addr; // 本机地址信息
     struct sockaddr_in remote_addr; // 客户端地址信息
-
-    MotorInit();
 
     if((sock_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         perror("socket创建出错！");
@@ -73,18 +70,18 @@ void Motion(int sock_fd, char *buff)
     char *param = buff + 5;
     char *space = strchr(param, ' ');
     *space = '\0';
-    Menu(atoi(param));
+    // Menu(atoi(param));
   }
 }
 
-void Menu(int cmd)
-{
-  switch (cmd)
-  {
-    case STOPMOTOR: MotorStop(); break;
-    case MOTORONE:  MotorDuty(MOTORONE * GradeToDuty); break;
-    case MOTORTWO:  MotorDuty(MOTORTWO * GradeToDuty); break;
-    case MOTORTHR:  MotorDuty(MOTORTHR * GradeToDuty); break;
-    default:;;
-  }
-}
+// void Menu(int cmd)
+// {
+//   switch (cmd)
+//   {
+//     case STOPMOTOR: MotorStop(); break;
+//     case MOTORONE:  MotorDuty(MOTORONE * GradeToDuty); break;
+//     case MOTORTWO:  MotorDuty(MOTORTWO * GradeToDuty); break;
+//     case MOTORTHR:  MotorDuty(MOTORTHR * GradeToDuty); break;
+//     default:;;
+//   }
+// }

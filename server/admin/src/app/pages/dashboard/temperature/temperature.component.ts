@@ -29,11 +29,9 @@ export class TemperatureComponent implements OnDestroy {
 
   ngOnInit(): void {
     this.dataService.getTemperature().then(data => {
-      console.log(data[0]['Temperature']);
       this.temperature = data[0]['Temperature'];
     });
     this.dataService.getHumidity().then(data => {
-      console.log(data[0]['Humidity']);
       this.humidity = data[0]['Humidity'];
     });
   }
