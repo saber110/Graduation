@@ -52,9 +52,7 @@ int main()
         }
         Motion(client_fd, buff);
         printf("received a connection from %s:%u\n", inet_ntoa(remote_addr.sin_addr), ntohs(remote_addr.sin_port));
-
         Responce(client_fd, "success\r\n");
-
         close(client_fd);
     }
     return 0;
