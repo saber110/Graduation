@@ -2,9 +2,10 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <cstring>
-#include "sync.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "sync.h"
+#include "Unique.h"
 using namespace std;
 class NetworkSync {
 private:
@@ -28,13 +29,13 @@ public:
    */
 
   int SendToServer(
-  const char * uuid,
-  unsigned int HeartRate,
-  unsigned int SpO2,
-  unsigned int Temperature,
-  unsigned int Humidity,
-  const char * Weather,
-  const char * UsageTime)
+    const char * uuid,
+    unsigned int HeartRate,
+    unsigned int SpO2,
+    unsigned int Temperature,
+    unsigned int Humidity,
+    const char * Weather,
+    const char * UsageTime)
   {
     int fd = -1;
     char PostHead[1024] = {0};
@@ -94,7 +95,6 @@ public:
 };
 
 int syncMain(
-    const char * uuid,
     unsigned int HeartRate,
     unsigned int SpO2,
     unsigned int Temperature,
@@ -105,6 +105,6 @@ int syncMain(
 {
   NetworkSync sync;
   sync.InitConnection();
-  sync.SendToServer(uuid,HeartRate,SpO2,Temperature,Humidity, Weather,UsageTime);
+  sync.SendToServer(UUID,HeartRate,SpO2,Temperature,Humidity, Weather,UsageTime);
   return 0;
 }

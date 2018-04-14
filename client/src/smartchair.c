@@ -109,8 +109,7 @@ void DataSync(void)
   tm_now = localtime(&now) ;
   snprintf(UsageTime, 25 ,"%d-%d-%d|%d:%d:%d",
 	tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec) ;
-	printf("%s\n", UsageTime);
-	syncMain("UuidExample",HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
+	syncMain(HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
 }
 
 int main(void)

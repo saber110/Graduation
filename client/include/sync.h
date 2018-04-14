@@ -8,7 +8,6 @@
 #define MSGSIZE 1024  //收发缓冲区的大小
 
 int syncMain(
-  const char * uuid,
   unsigned int HeartRate,
   unsigned int SpO2,
   unsigned int Temperature,
