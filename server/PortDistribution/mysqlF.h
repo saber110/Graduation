@@ -6,7 +6,7 @@
 #define mysql  t_mysql        //mysql句柄
 #define host_name   "127.0.0.1"    //数据库服务器地址
 #define username    "root"         //数据库用户名
-#define password    "yycx1996"     //数据库密码
+#define password    "hhb19960808*"     //数据库密码
 #define db_name     "SmartChair"   //数据库名
 #define mysqlPort   3306           //数据库端口
 #define record      "|"

@@ -66,7 +66,8 @@ http://123.206.64.174/dist/#/pages/dashboard/UuidExample
 3. 发布 : ng build --prod --aot
 ```
 ```
-
+./CmdDistribution
+./PortDistribution
 ```
 
 ## 注意
