@@ -17,10 +17,11 @@ export class DataService {
 
   SetMotor(CMD1:string="11")
   {
-    return this.http.get(this.RaspberryHost + CMD1 )
-              .toPromise()
-              .then(function(response){ return response; })
-              .catch(this.handleError);
+    console.log(this.uuid);
+    // return this.http.get(this.RaspberryHost + CMD1 )
+    //           .toPromise()
+    //           .then(function(response){ return response; })
+    //           .catch(this.handleError);
   }
 
   getTemperature() {
