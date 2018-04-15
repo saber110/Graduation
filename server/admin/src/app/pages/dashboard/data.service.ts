@@ -7,21 +7,19 @@ import { AppComponent } from '../../app.component'
 export class DataService {
   private uuid = 'UuidExample';
   private Host = "http://123.206.64.174:7777";
-  private RaspberryHost = "http://123.206.64.174:6565/";
+  private RaspberryHost = "http://123.206.64.174:3333/";
   constructor(private http: Http,
               private app: AppComponent,) {
-
-    console.log(app.getUuid());
     this.uuid = app.getUuid();
   }
 
   SetMotor(CMD1:string="11")
   {
     console.log(this.uuid);
-    // return this.http.get(this.RaspberryHost + CMD1 )
-    //           .toPromise()
-    //           .then(function(response){ return response; })
-    //           .catch(this.handleError);
+    return this.http.get(this.RaspberryHost + this.uuid + '/' + CMD1)
+              .toPromise()
+              .then(function(response){ return response; })
+              .catch(this.handleError);
   }
 
   getTemperature() {
