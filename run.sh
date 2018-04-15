@@ -16,9 +16,9 @@ else
   cd $path/server
   python Graduation.py &
   # run CmdDistribution
-  cd $path/CmdDistribution/
+  cd $path/server/CmdDistribution/
   ./CmdDistribution &
   # run PortDistribution
-  cd $path/PortDistribution
+  cd $path/server/PortDistribution
   ./PortDistribution &
 fi
