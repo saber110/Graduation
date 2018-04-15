@@ -65,6 +65,9 @@ http://123.206.64.174/dist/#/pages/dashboard/UuidExample
 2. 安装 : npm install
 3. 发布 : ng build --prod --aot
 ```
+```
+
+```
 
 ## 注意
 1. 启动C工程请用su权限
