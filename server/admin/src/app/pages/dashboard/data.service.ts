@@ -10,7 +10,9 @@ export class DataService {
   private RaspberryHost = "http://123.206.64.174:3333/";
   constructor(private http: Http,
               private app: AppComponent,) {
+
     this.uuid = app.getUuid();
+    console.log(app.getUuid());
   }
 
   SetMotor(CMD1:string="11")

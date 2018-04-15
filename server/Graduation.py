@@ -31,14 +31,14 @@ def getheartRate(uuid = 'UuidExample'):
 
 def getDataLastly(field = 'Temperature', table = 'UuidExample'):
     db = mysql.connect()
-    data = mysql.getData(db, "select "+ field +" from "+table +" where id = (select max(id) from "+table+")", table)
+    data = mysql.getData(db, "select "+ field +" from `"+table +"` where id = (select max(id) from `"+table+"`)", table)
     mysql.close(db)
     return json.dumps(data)
     pass
 
 def getDataLimit(field = 'HeartRate', table = 'UuidExample',limit=10):
     db = mysql.connect('data')
-    data = mysql.getData(db, "select "+ field +" from "+table +" ORDER BY id DESC limit " + str(limit) + " ;", table)
+    data = mysql.getData(db, "select "+ field +" from `"+table +"` ORDER BY id DESC limit " + str(limit) + " ;", table)
     mysql.close(db)
 
     return json.dumps(data)
@@ -46,7 +46,7 @@ def getDataLimit(field = 'HeartRate', table = 'UuidExample',limit=10):
 
 def getData(table):
     db = mysql.connect()
-    data = mysql.getData(db, "select * from "+table, table)
+    data = mysql.getData(db, "select * from `"+table+"`", table)
     mysql.close(db)
     return data
 

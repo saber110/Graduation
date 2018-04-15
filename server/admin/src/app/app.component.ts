@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
               private location: Location,) {
     var partten = "[^/]+(?!.*/)";
     var url = location.path().match(partten);
-    // this.uuid = url[0];
-    this.uuid = "UuidExample";
+    this.uuid = url[0];
+    // this.uuid = "UuidExample";
   }
 
   getUuid(){
