@@ -23,7 +23,7 @@ int CmdDistribution::SendCmd(const int port, const char * cmd)
   memset(&server, '0', sizeof(server));
   server.sin_addr.s_addr = inet_addr(SERVER_ADDR);
   server.sin_family = AF_INET;
-  server.sin_port = htons(atoi(port));
+  server.sin_port = htons(port);
 
   fd = socket(AF_INET, SOCK_STREAM, 0);
   if(fd == -1)
