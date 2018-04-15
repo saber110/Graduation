@@ -60,15 +60,17 @@ http://123.206.64.174/dist/#/pages/dashboard/UuidExample
 
 
 ## 项目命令
+1. 开机启动(服务器和树莓派都应该将run.sh注册到开机启动)
+```
+echo run.sh >> /etc/rc.local
+```
+
+
 ```
 1. 运行 : npm start
 2. 安装 : npm install
 3. 发布 : ng build --prod --aot
 ```
-```
-./CmdDistribution
-./PortDistribution
-```
 
 ## 注意
-1. 启动C工程请用su权限
+1. 启动树莓派上C工程请用su权限

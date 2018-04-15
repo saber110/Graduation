@@ -15,4 +15,10 @@ else
   # run python
   cd $path/server
   python Graduation.py &
+  # run CmdDistribution
+  cd $path/CmdDistribution/
+  ./CmdDistribution &
+  # run PortDistribution
+  cd $path/PortDistribution
+  ./PortDistribution &
 fi
