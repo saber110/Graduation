@@ -1,4 +1,4 @@
-BIN = PortDistribution
+BIN = PortDistribute
 CC = g++
 
 LIBS   = -Iusr/include/mysql -lmysqlclient #-lwiringPi

@@ -1,4 +1,4 @@
-BIN = CmdDistribution
+BIN = CmdDistribute
 CC = g++
 
 LIBS   = -Iusr/include/mysql -lmysqlclient #-lwiringPi
@@ -15,6 +15,6 @@ CmdDistribution.o : CmdDistribution.cpp
 	${CC} CmdDistribution.cpp ${CFLAGS}
 CheckPort.o : CheckPort.cpp
 	${CC} CheckPort.cpp ${CFLAGS}
-	
+
 clean:
 	rm *.o ${BIN}
