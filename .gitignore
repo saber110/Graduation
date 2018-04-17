@@ -41,3 +41,4 @@ mysql/mysqlconfig.py
 server/admin/node_modules
 new/
 *mysqlconfig.py
+dist/
