@@ -14,11 +14,11 @@ void PortAll::PortRegister(int port, string uuid)
   char cmd[100] = {0};
   MysqlOpt mysql;
   mysql.mysql_ready();
-  snprintf(cmd, 100, mysqlCmd, port, uuid.c_str());
-  mysql.cvpn_mysql_execute(cmd);
-  memset(cmd, 0, sizeof(cmd));
   snprintf(cmd, 100, mysqlFindPortCmd, uuid.c_str());
   char * PortBefore = mysql.cvpn_mysql_select(cmd);
+  memset(cmd, 0, sizeof(cmd));
+  snprintf(cmd, 100, mysqlCmd, port, uuid.c_str());
+  mysql.cvpn_mysql_execute(cmd);
   mysql.cvpn_mysql_close();
   PortCycleByPID(FindPIDByPort(atoi(PortBefore)));
 }
