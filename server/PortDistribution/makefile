@@ -3,7 +3,7 @@ CC = g++
 
 LIBS   = -Iusr/include/mysql -lmysqlclient #-lwiringPi
 OBJS   = mysql.o server.o Port.o
-CFLAGS = -c ${LIBS}
+CFLAGS = -c ${LIBS} -std=c++11
 
 ${BIN} : ${OBJS}
 	${CC} ${OBJS} ${LIBS} -o ${BIN}
