@@ -1,16 +1,10 @@
 #!/bin/bash
 path=$(cd `dirname $0`; pwd)
-
+pathOfInternet="/etc/network/if-up.d/"
 system=`uname -a`
 result=$(echo $system | grep "raspberrypi")
 if [ "$result" != "" ]; then
-  # run CMD parse
-  cd $path/client/cmdOpt
-  ./cmdparse > $path/log/cmdparse.log &
-  # run ssh reserve proxy
-  cd $path/client/ReserveProxyPort
-  port=`./PortApply`
-  ssh -N -f -R $port:localhost:3333 ubuntu@123.206.64.174 -i /home/pi/laptop_win10 > $path/log/ReserveProxyPort.log &
+  mv ClientRunAfterInternetConnect.sh pathOfInternet
 else
   # run python
   cd $path/server
