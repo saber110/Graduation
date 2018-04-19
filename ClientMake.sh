@@ -12,3 +12,7 @@ make
 cd $path/client/ReserveProxyPort
 make clean
 make
+
+cd $path/client/networkStatus
+make clean
+make

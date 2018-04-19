@@ -1,8 +1,5 @@
 #!/bin/bash
 path="/home/pi/BiYeSheJi"
-# run CMD parse
-cd $path/client/cmdOpt
-./cmdparse > $path/log/cmdparse.log &
 # run ssh reserve proxy
 cd $path/client/ReserveProxyPort
 port=`./PortApply`

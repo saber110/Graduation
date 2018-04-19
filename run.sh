@@ -4,7 +4,10 @@ pathOfInternet="/etc/network/if-up.d/"
 system=`uname -a`
 result=$(echo $system | grep "raspberrypi")
 if [ "$result" != "" ]; then
-  mv ClientRunAfterInternetConnect.sh pathOfInternet
+  ./ReserveProxy.sh &
+  # run CMD parse
+  cd $path/client/cmdOpt
+  ./cmdparse > $path/log/cmdparse.log &
 else
   # run python
   cd $path/server
