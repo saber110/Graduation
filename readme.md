@@ -65,7 +65,12 @@ http://123.206.64.174/dist/#/pages/dashboard/UuidExample
 ```
 echo run.sh >> /etc/rc.local
 ```
-
+2. 环境变量
+  - TTS
+  ```
+  nano /root/.bashrc
+  export LD_LIBRARY_PATH="/home/pi/BiYeSheJi/client/tts/libs/RaspberryPi"
+  ```
 
 ```
 1. 运行 : npm start
@@ -75,3 +80,4 @@ echo run.sh >> /etc/rc.local
 
 ## 注意
 1. 启动树莓派上C工程请用su权限
+2. 重新配置环境之后请检查 clent/include/Unique.h 文件中的定义

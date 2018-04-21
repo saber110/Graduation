@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DHT11.h"
+#include "Unique.h"
 
 uint32 databuf;
 int DHT11Result[2] = {0};
@@ -70,9 +71,8 @@ void getDHT11Result(int * DHT11Temp, int * Humidity)
   databuf = 0;
   *DHT11Temp = DHT11Result[TEMPERATURE];
   *Humidity  = DHT11Result[HUMIDITY];
-  snprintf(command,sizeof(command),"%s %s:%d。%s:%d","espeak -vzh", "现在的室内温度为", DHT11Result[TEMPERATURE],"现在的室内湿度为", DHT11Result[HUMIDITY]);
-  printf("%s\n", command);
-  system(command);
+  snprintf(command,sizeof(command),"%s %s:%d。%s:%d %s",TTS, "现在的室内温度为", DHT11Result[TEMPERATURE],"现在的室内湿度为", DHT11Result[HUMIDITY],"&");
+  // system(command);
 }
 // int main (void)
 // {
