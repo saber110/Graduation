@@ -1,0 +1,178 @@
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:40400
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:40412
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:40432
+GET 60
+60
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:40452
+GET 60
+60
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:40490
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:40516
+GET 10
+10
+GET 10
+10
+开始合成 ...按摩结束 -> temp.wav
+temp.wav
+按摩结束
+合成完毕
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:43400
+GET 20
+20
+开始合成 ...开始按摩 -> temp.wav
+temp.wav
+开始按摩
+合成完毕
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:43432
+GET 40
+40
+开始合成 ...开始按摩 -> temp.wav
+temp.wav
+开始按摩
+合成完毕
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:43462
+GET 10
+10
+开始合成 ...按摩结束 -> temp.wav
+temp.wav
+按摩结束
+合成完毕
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:43494
+GET 10
+10
+开始合成 ...按摩结束 -> temp.wav
+temp.wav
+按摩结束
+合成完毕
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:54670
+GET 60
+60
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:54682
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:54696
+GET 10
+10
+GET 10
+10
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:53792
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:54086
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:54216
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:54304
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:54424
+GET 40
+40
+GET 40
+40
+开始合成 ...开始按摩 -> temp.wav
+temp.wav
+开始按摩
+合成完毕
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:55520
+GET 10
+10
+开始合成 ...按摩结束 -> temp.wav
+temp.wav
+按摩结束
+合成完毕
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:36710
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:36740
+GET 20
+20
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:34964
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:34982
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:34988
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:35016
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:35028
+GET 40
+40
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:35048
+GET 40
+40
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:35110
+GET 60
+60
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:35114
+GET 60
+60
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:37860
+GET 10
+10
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 按摩结束 &
+received a connection from 127.0.0.1:37870
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:37994
+GET 20
+20
+/home/pi/BiYeSheJi/client/tts/bin/tts temp.wav 开始按摩 &
+received a connection from 127.0.0.1:38002
+GET 20
+20

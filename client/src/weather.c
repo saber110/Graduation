@@ -136,7 +136,8 @@ void getWeatherString(const char * city, char * TypeChar)
   // print_preallocated(weather[0]);
   strncpy(TypeChar, typeChar,strlen(typeChar));
   TypeChar[strlen(typeChar)-1] = '\0';
-  snprintf(weatherString,sizeof(weatherString),"%s %s%s,%s,%s,%s %s",TTS,"您好，现在为您播报天气，今天",typeChar,lowChar,highChar,"请注意增减衣物","&");
+  snprintf(weatherString,sizeof(weatherString),"%s%s %s %s%s,%s,%s,%s %s", ClientPATH ,TTS , "temp.wav" ,
+            "您好，现在为您播报天气，今天",typeChar,lowChar,highChar,"请注意增减衣物","&");
   system(weatherString);
 
   free(highChar);

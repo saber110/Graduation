@@ -1,4 +1,6 @@
 #include <wiringPi.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "motor.h"
 #include "Unique.h"
 
@@ -14,13 +16,24 @@ void MotorInit()
 void MotorDuty(int value)
 {
   char command[100] = {0};
-  snprintf(command, sizeof(command),"%s %s %s", TTS, "开始按摩", "&");
+
+  switch (value)
+  {
+    case MOTORONE:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "慢速按摩", "&"); break;
+    case MOTORTWO:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "中速按摩", "&"); break;
+    case MOTORTHR:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "快速按摩", "&"); break;
+    default:;;
+  }
+  printf("%s\n", command);
+  system(command);
   pwmWrite(PWM, value);
 }
 
 void MotorStop()
 {
   char command[100] = {0};
-  snprintf(command, sizeof(command),"%s %s %s", TTS, "按摩结束", "&");
+  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "按摩结束", "&");
+  printf("%s\n", command);
+  system(command);
   MotorDuty(0);
 }

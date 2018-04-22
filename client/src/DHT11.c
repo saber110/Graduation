@@ -71,8 +71,9 @@ void getDHT11Result(int * DHT11Temp, int * Humidity)
   databuf = 0;
   *DHT11Temp = DHT11Result[TEMPERATURE];
   *Humidity  = DHT11Result[HUMIDITY];
-  snprintf(command,sizeof(command),"%s %s:%d。%s:%d %s",TTS, "现在的室内温度为", DHT11Result[TEMPERATURE],"现在的室内湿度为", DHT11Result[HUMIDITY],"&");
-  // system(command);
+  snprintf(command,sizeof(command),"%s%s %s %s:%d。%s:%d %s",ClientPATH ,TTS ,"temp.wav" ,
+          "现在的室内温度为", DHT11Result[TEMPERATURE],"现在的室内湿度为", DHT11Result[HUMIDITY],"&");
+  system(command);
 }
 // int main (void)
 // {

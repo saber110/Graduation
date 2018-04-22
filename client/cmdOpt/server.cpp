@@ -70,9 +70,10 @@ void Motion(int sock_fd, char *buff)
   // 截取接口参数
   if(!strncmp(buff, "GET", 3))
   {
-    char *param = buff + 5;
+    char *param = buff + 4;
     char *space = strchr(param, ' ');
     *space = '\0';
+    cout << buff << "\n" << param << endl;
     Menu(atoi(param));
   }
 }

@@ -68,6 +68,10 @@ echo run.sh >> /etc/rc.local
 2. 环境变量
   - TTS
   ```
+  nano /etc/profile
+  export LD_LIBRARY_PATH="/home/pi/BiYeSheJi/client/tts/libs/RaspberryPi"
+
+  # 开机启动的时候由init监护
   nano /root/.bashrc
   export LD_LIBRARY_PATH="/home/pi/BiYeSheJi/client/tts/libs/RaspberryPi"
   ```

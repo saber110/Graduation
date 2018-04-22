@@ -145,6 +145,15 @@ void Play(const char* filename)
 	system(cmd);
 }
 
+// 通过产生文件来测试是否执行到
+void testFile()
+{
+  FILE *fd;
+  fd = fopen("done.txt","a");
+  fputs("done\n", fd);
+  fclose(fd);
+}
+
 void* GenerateAudio(void * p)
 {
 	int         ret                  = MSP_SUCCESS;
@@ -171,6 +180,7 @@ void* GenerateAudio(void * p)
 
 	Play(filename);
 
+	testFile();
 exit:
 	MSPLogout(); //退出登录
 

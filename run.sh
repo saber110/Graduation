@@ -7,7 +7,7 @@ if [ "$result" != "" ]; then
   ./ReserveProxy.sh &
   # run CMD parse
   cd $path/client/cmdOpt
-  ./cmdparse >> $path/log/cmdparse.log &
+  ./cmdparse 
 else
   # run python
   cd $path/server
