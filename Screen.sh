@@ -1,6 +1,5 @@
 #!/bin/bash
-# 保证导入 LD_LIBRARY_PATH 环境变量
-ldconfig
+
 path=$(cd `dirname $0`; pwd)
 cd $path
 
