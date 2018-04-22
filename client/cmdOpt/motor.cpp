@@ -26,7 +26,7 @@ void MotorDuty(int value)
   }
   printf("%s\n", command);
   system(command);
-  pwmWrite(PWM, value);
+  pwmWrite(PWM, value * GradeToDuty);
 }
 
 void MotorStop()

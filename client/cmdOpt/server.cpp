@@ -83,9 +83,9 @@ void Menu(int cmd)
   switch (cmd)
   {
     case STOPMOTOR: MotorStop(); break;
-    case MOTORONE:  MotorDuty(MOTORONE * GradeToDuty); break;
-    case MOTORTWO:  MotorDuty(MOTORTWO * GradeToDuty); break;
-    case MOTORTHR:  MotorDuty(MOTORTHR * GradeToDuty); break;
+    case MOTORONE:  MotorDuty(MOTORONE); break;
+    case MOTORTWO:  MotorDuty(MOTORTWO); break;
+    case MOTORTHR:  MotorDuty(MOTORTHR); break;
     default:;;
   }
 }
