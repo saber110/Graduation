@@ -1,3 +1,4 @@
+# 记得volatile优化KEY0
 # 毕设
 ## 智能座椅功能规划
 1. 心率
@@ -15,6 +16,7 @@
 ### 端口分发
 
 使用原因：在客户端建立ssh反向代理的时候需要监听服务端端口，多客户端时容易产生端口冲突
+
 PortDistribute 要用su权限执行，（lsof -i:port）
 
 ### 网页端
@@ -33,11 +35,7 @@ PortDistribute 要用su权限执行，（lsof -i:port）
 
 ## 数据库(MySQL)
 db.1
-
-
-  |id|HeartRate|SpO2|Temperature|Humidity|Weather|UsageTime|SynTime|
-  |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-  |同步次数|心率|血氧饱和度|室内温度|室内湿度|当地天气|此次数据产生时间|此次数据同步时间|
+  ![数据库](server/admin/config/db.png)
 
 ## 访问地址
 ```
