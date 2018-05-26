@@ -17,6 +17,7 @@ private:
 public:
   PortApply()
   {
+//    cout << "server addr " << SERVER_ADDR << endl;
     memset(&server, '0', sizeof(server));
     server.sin_addr.s_addr = inet_addr(SERVER_ADDR);
     server.sin_family = AF_INET;
@@ -32,6 +33,7 @@ public:
     string Host = "Host: ";
     string NewLine = "\r\n";
 
+  //  cout << "it is funny " << endl;
     fd = socket(AF_INET, SOCK_STREAM, 0);
     if(fd == -1)
     {
@@ -41,7 +43,7 @@ public:
     {
       perror("connect server error");
     }
-
+    //cout << "I think it is ok here " <<endl;
     strncat(PostHead, Post.c_str(), strlen(Post.c_str()) + 1);
     strncat(PostHead, uuid, strlen(uuid) + 1);
     strncat(PostHead, " ", strlen(" ") + 1);
@@ -52,6 +54,9 @@ public:
     strncat(PostHead, PORT, strlen(PORT) + 1);
     strncat(PostHead, NewLine.c_str(), strlen(NewLine.c_str()) + 1);
     strncat(PostHead, NewLine.c_str(), strlen(NewLine.c_str()) + 1);
+
+//    cout << "this is the first test" << endl;
+
 
     if(send(fd, PostHead, strlen(PostHead), 0) == -1)
     {
@@ -69,6 +74,8 @@ public:
 int main()
 {
   PortApply app;
+//  cout << "UUID" << UUID << endl;
   app.getPort(UUID);
+  //cout << "this is a test" << endl;
   return 0;
 }
