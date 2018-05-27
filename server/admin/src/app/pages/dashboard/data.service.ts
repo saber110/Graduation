@@ -7,7 +7,7 @@ import { AppComponent } from '../../app.component'
 export class DataService {
   private uuid = 'UuidExample';
   private Host = "http://123.206.64.174:7777";
-  private RaspberryHost = "http://123.206.64.174:3333/";
+  private RaspberryHost = "http://123.206.64.174:33330/";
   constructor(private http: Http,
               private app: AppComponent,) {
 

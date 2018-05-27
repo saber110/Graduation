@@ -2,7 +2,7 @@
 #define _PORTAPPLY_H_
 
 #define SERVER_ADDR "123.206.64.174"
-#define PORT "4441"
+#define PORT "44410"
 #define MSGSIZE 1024  //收发缓冲区的大小
 
 #endif
