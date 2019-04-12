@@ -7,6 +7,7 @@
 
 void bsp_InitI2C(void)
 {
+	wiringPiSetup();
 	pinMode (I2C_SDA_PIN, OUTPUT);
 	pinMode (I2C_SCL_PIN, OUTPUT);
 	i2c_Stop();

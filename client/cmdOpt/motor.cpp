@@ -6,6 +6,7 @@
 
 void MotorInit()
 {
+  wiringPiSetup();
   pinMode(PWM,PWM_OUTPUT);
   pwmSetMode(PWM_MODE_MS);
   pwmSetClock(192);
