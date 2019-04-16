@@ -32,6 +32,7 @@ CREATE TABLE `User` (
   `id` int(11) NOT NULL,
   `uid` text NOT NULL COMMENT '设备特征字符',
   `Name` text NOT NULL,
+  `Port` text,
   `Email` text NOT NULL COMMENT '自己的邮箱',
   `EmailAnother` text NOT NULL COMMENT ' 需要推送的另一个邮箱',
   `PhoneNum` text NOT NULL COMMENT '自己的电话号码',

@@ -16,6 +16,7 @@ void PortAll::PortRegister(int port, string uuid)
   mysql.mysql_ready();
   snprintf(cmd, 100, mysqlFindPortCmd, uuid.c_str());
   char * PortBefore = mysql.cvpn_mysql_select(cmd);
+  cout << "query cmd: \t" << "\tquery result:\t" << PortBefore << endl;
   memset(cmd, 0, sizeof(cmd));
   snprintf(cmd, 100, mysqlCmd, port, uuid.c_str());
   mysql.cvpn_mysql_execute(cmd);

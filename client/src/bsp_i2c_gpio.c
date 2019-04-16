@@ -2,9 +2,6 @@
 #include "bsp_i2c_gpio.h"
 #include"main.h"
 
-
-
-
 void bsp_InitI2C(void)
 {
 	wiringPiSetup();
@@ -15,9 +12,6 @@ void bsp_InitI2C(void)
 
  void i2c_Delay(void)
 {
-	// uint8_t i;
-  //
-	// for (i = 0; i < 30; i++);
 	delayMicroseconds(5);
 }
 

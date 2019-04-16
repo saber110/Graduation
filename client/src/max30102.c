@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include<wiringPi.h>
 
+#define INTERRUPT_REG  					0X00
 #define max30102_WR_address 0xAE
 #define I2C_WR	0
 #define I2C_RD	1
@@ -40,8 +41,6 @@ cmd_fail:
 	i2c_Stop();
 	return 0;
 }
-
-
 
 u8 max30102_Bus_Read(u8 Register_Address)
 {
@@ -83,7 +82,6 @@ cmd_fail:
 	i2c_Stop();
 	return 0;
 }
-
 
 int maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
 {
@@ -161,11 +159,7 @@ cmd_fail:
     return false;
 }
 
-
-#define INTERRUPT_REG  					0X00
-int maxim_max30102_init(void)
-
-{
+int maxim_max30102_init(void){
     if(!maxim_max30102_write_reg(REG_INTR_ENABLE_1, 0xd0)) // INTR setting
         return false;
 		delayMicroseconds(5);
