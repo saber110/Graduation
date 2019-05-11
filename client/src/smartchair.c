@@ -112,7 +112,7 @@ void DataSync(void)
 	syncMain(HrResult[50],Spo2Result[50],temperature,Humidity,WeatherType,UsageTime);
 }
 
-int main(void)
+int main1(void)
 {
 	char Max30102Init = 0;
   n_ir_buffer_length = 150;

@@ -18,6 +18,7 @@ void bsp_InitI2C(void)
 
 void i2c_Start(void)
 {
+	wiringPiSetup();
 	pinMode (I2C_SDA_PIN, OUTPUT);
 	I2C_SDA_1();
 	delayMicroseconds(5);
@@ -29,9 +30,14 @@ void i2c_Start(void)
 	delayMicroseconds(5);
 }
 
+void i2c_ReStart(void){
+	i2c_Start();
+}
+
 
 void i2c_Stop(void)
 {
+	wiringPiSetup();
 	pinMode (I2C_SDA_PIN, OUTPUT);
 
 	I2C_SDA_0();

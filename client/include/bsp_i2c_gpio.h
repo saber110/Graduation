@@ -9,14 +9,14 @@
 #define I2C_SDA_PIN		0
 #define MAX30102_INT  2
 
-#define I2C_SCL_1()   digitalWrite (I2C_SCL_PIN, HIGH)			/* SCL = 1 */
-#define I2C_SCL_0()   digitalWrite (I2C_SCL_PIN, LOW)				/* SCL = 0 */
+#define I2C_SCL_1()   digitalWrite(I2C_SCL_PIN, HIGH)			/* SCL = 1 */
+#define I2C_SCL_0()   digitalWrite(I2C_SCL_PIN, LOW)				/* SCL = 0 */
 
-#define I2C_SDA_1()  	digitalWrite (I2C_SDA_PIN, HIGH)			/* SDA = 1 */
-#define I2C_SDA_0()  	digitalWrite (I2C_SDA_PIN, LOW)			/* SDA = 0 */
+#define I2C_SDA_1()  	digitalWrite(I2C_SDA_PIN, HIGH)			/* SDA = 1 */
+#define I2C_SDA_0()  	digitalWrite(I2C_SDA_PIN, LOW)			  /* SDA = 0 */
 
-#define I2C_SDA_READ() digitalRead (I2C_SDA_PIN)
-#define I2C_SCL_READ()  digitalRead (I2C_SCL_PIN)
+#define I2C_SDA_READ() digitalRead(I2C_SDA_PIN)
+#define I2C_SCL_READ() digitalRead(I2C_SCL_PIN)
 
 extern void bsp_InitI2C(void);
 extern void i2c_Start(void);
