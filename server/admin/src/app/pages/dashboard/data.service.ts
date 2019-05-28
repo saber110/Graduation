@@ -1,22 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
-import { AppComponent } from '../../app.component'
+import { AppComponent } from '../../app.component';
 
 @Injectable()
 export class DataService {
   private uuid = 'UuidExample';
-  private Host = "http://139.180.217.184:7777";
-  private RaspberryHost = "http://139.180.217.184:33330/";
+  private Host = 'http://139.180.217.184:7777';
+  private RaspberryHost = 'http://139.180.217.184:33330/';
   constructor(private http: HttpClient,
-              private app: AppComponent,) {
-
+              private app: AppComponent ) {
     this.uuid = app.getUuid();
     console.log(app.getUuid());
   }
 
-  SetMotor(CMD1:string="11")
-  {
+  SetMotor(CMD1: string='11') {
     console.log(this.uuid);
     return this.http.get(this.RaspberryHost + this.uuid + '/' + CMD1)
               .toPromise()

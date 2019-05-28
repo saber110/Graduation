@@ -22,12 +22,12 @@ import { DataService } from '../data.service';
 })
 export class StatusCardComponent {
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService) {}
   @Input() title: string;
   @Input() type: string;
   @Input() cmd: string;
   @Input() on = true;
-  click(){
+  click() {
     this.on = !this.on;
     this.dataService.SetMotor(this.cmd);
   }

@@ -14,17 +14,17 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 export class AppComponent implements OnInit {
   private uuid;
   // 从url字符串提取uuid
-  //http://127.0.0.1:4200/#/pages/dashboard/UuidExample
+  // http://127.0.0.1:4200/#/pages/dashboard/UuidExample
 
   constructor(private analytics: AnalyticsService,
-              private location: Location,) {
-    var partten = "[^/]+(?!.*/)";
-    var url = location.path().match(partten);
+              private location: Location) {
+    let partten = '[^/]+(?!.*/)';
+    let url = location.path().match(partten);
     this.uuid = url[0];
     // this.uuid = "UuidExample";
   }
 
-  getUuid(){
+  getUuid() {
     return this.uuid;
   }
 

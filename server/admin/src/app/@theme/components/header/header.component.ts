@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserData,
               private analyticsService: AnalyticsService,
               private layoutService: LayoutService) {
   }
