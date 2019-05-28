@@ -22,7 +22,7 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
   @Input() maxLeap = 0.4;
 
   value = 50;
-  @Output('valueChange') valueChange = new EventEmitter<Number>();
+  @Output() valueChange = new EventEmitter<Number>();
   @Input('value') set setValue(value) {
     this.value = value;
   }
@@ -119,8 +119,13 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
     this.calculateVars();
 
     this.invalidateClipPathStr();
-    this.invalidateGradientArcs();
     this.invalidatePinPosition();
+
+    // Chrome fix, temporary solution
+    // TODO: review set data to styles object
+    setTimeout(() => {
+      this.invalidateGradientArcs();
+    });
   }
 
   private calculateVars() {
@@ -308,35 +313,35 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
   }
 
   private recalculateValue(event, allowJumping = false) {
-    // if (this.isMouseDown && !this.off) {
-    //   const rect = this.svgRoot.nativeElement.getBoundingClientRect();
-    //   const center = {
-    //     x: rect.left + VIEW_BOX_SIZE * this.scaleFactor / 2,
-    //     y: rect.top + (this.translateYValue + this.radius) * this.scaleFactor,
-    //   };
-    //   let actualAngle = Math.atan2(center.x - event.clientX, event.clientY - center.y);
-    //   if (actualAngle < 0) {
-    //     actualAngle = actualAngle + 2 * Math.PI;
-    //   }
-    //
-    //   const previousRelativeValue = this.getValuePercentage();
-    //   let relativeValue = 0;
-    //   if (actualAngle < this.bottomAngleRad / 2) {
-    //     relativeValue = 0;
-    //   } else if (actualAngle > 2 * Math.PI - this.bottomAngleRad / 2) {
-    //     relativeValue = 1;
-    //   } else {
-    //     relativeValue = (actualAngle - this.bottomAngleRad / 2) / (2 * Math.PI - this.bottomAngleRad);
-    //   }
-    //
-    //   const value = this.toValueNumber(relativeValue);
-    //
-    //   if (this.value !== value && (allowJumping || Math.abs(relativeValue - previousRelativeValue) < this.maxLeap)) {
-    //     this.value = value;
-    //     this.valueChange.emit(this.value);
-    //     this.invalidatePinPosition();
-    //   }
-    // }
+    if (this.isMouseDown && !this.off) {
+      const rect = this.svgRoot.nativeElement.getBoundingClientRect();
+      const center = {
+        x: rect.left + VIEW_BOX_SIZE * this.scaleFactor / 2,
+        y: rect.top + (this.translateYValue + this.radius) * this.scaleFactor,
+      };
+      let actualAngle = Math.atan2(center.x - event.clientX, event.clientY - center.y);
+      if (actualAngle < 0) {
+        actualAngle = actualAngle + 2 * Math.PI;
+      }
+
+      const previousRelativeValue = this.getValuePercentage();
+      let relativeValue = 0;
+      if (actualAngle < this.bottomAngleRad / 2) {
+        relativeValue = 0;
+      } else if (actualAngle > 2 * Math.PI - this.bottomAngleRad / 2) {
+        relativeValue = 1;
+      } else {
+        relativeValue = (actualAngle - this.bottomAngleRad / 2) / (2 * Math.PI - this.bottomAngleRad);
+      }
+
+      const value = this.toValueNumber(relativeValue);
+
+      if (this.value !== value && (allowJumping || Math.abs(relativeValue - previousRelativeValue) < this.maxLeap)) {
+        this.value = value;
+        this.valueChange.emit(this.value);
+        this.invalidatePinPosition();
+      }
+    }
   }
 
   private getValuePercentage() {

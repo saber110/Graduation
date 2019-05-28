@@ -78,6 +78,7 @@ echo run.sh >> /etc/rc.local
 1. 运行 : npm start
 2. 安装 : npm install
 3. 发布 : ng build --prod --aot
+         npm run build:prod
 ```
 
 ## 注意

@@ -1,5 +1,6 @@
 {
   "/api":{
-    "target":"http://127.0.0.1:7777"
+    "target":"http://139.180.217.184:7777",
+    "secure": false
   }
 }

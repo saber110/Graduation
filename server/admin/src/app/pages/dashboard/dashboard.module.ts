@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { AngularEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
@@ -13,6 +14,7 @@ import { TemperatureComponent } from './temperature/temperature.component';
 import { TemperatureDraggerComponent } from './temperature/temperature-dragger/temperature-dragger.component';
 import { TeamComponent } from './team/team.component';
 import { KittenComponent } from './kitten/kitten.component';
+import { SecurityCamerasComponent } from './security-cameras/security-cameras.component';
 import { ElectricityComponent } from './electricity/electricity.component';
 import { ElectricityChartComponent } from './electricity/electricity-chart/electricity-chart.component';
 import { WeatherComponent } from './weather/weather.component';
@@ -20,7 +22,6 @@ import { SolarComponent } from './solar/solar.component';
 import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
-import { SecurityCamerasComponent } from './security-cameras/security-cameras.component';
 import { ChartjsMultipleXaxisComponent } from '../charts/chartjs/chartjs-multiple-xaxis.component';
 
 @NgModule({
@@ -40,10 +41,10 @@ import { ChartjsMultipleXaxisComponent } from '../charts/chartjs/chartjs-multipl
     RoomsComponent,
     TeamComponent,
     KittenComponent,
+    SecurityCamerasComponent,
     ElectricityComponent,
     ElectricityChartComponent,
     ChartjsMultipleXaxisComponent,
-    SecurityCamerasComponent,
     WeatherComponent,
     PlayerComponent,
     SolarComponent,

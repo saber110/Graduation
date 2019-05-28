@@ -1,6 +1,10 @@
-import { Component, OnDestroy,OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import { Temperature, TemperatureHumidityData } from '../../../@core/data/temperature-humidity';
+import { takeWhile } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import { DataService } from '../data.service';
+
 @Component({
   providers: [DataService],
   selector: 'ngx-temperature',
@@ -9,6 +13,17 @@ import { DataService } from '../data.service';
 })
 export class TemperatureComponent implements OnDestroy {
 
+  private alive = true;
+
+  // temperatureData: Temperature;
+  // temperature: number;
+  // temperatureOff = false;
+  // temperatureMode = 'cool';
+  //
+  // humidityData: Temperature;
+  // humidity: number;
+  // humidityOff = false;
+  // humidityMode = 'heat';
   temperature = 20;
   temperatureOff = false;
   temperatureMode = 'cool';
@@ -21,22 +36,25 @@ export class TemperatureComponent implements OnDestroy {
   themeSubscription: any;
 
   constructor(private theme: NbThemeService,
+              private temperatureHumidityService: TemperatureHumidityData,
               private dataService: DataService) {
-                this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-                this.colors = config.variables;
+    this.theme.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(config => {
+      this.colors = config.variables;
     });
   }
 
   ngOnInit(): void {
-    this.dataService.getTemperature().then(data => {
-      this.temperature = data[0]['Temperature'];
-    });
-    this.dataService.getHumidity().then(data => {
-      this.humidity = data[0]['Humidity'];
-    });
-  }
+  this.dataService.getTemperature().then(data => {
+    this.temperature = data[0]['Temperature'];
+  });
+  this.dataService.getHumidity().then(data => {
+    this.humidity = data[0]['Humidity'];
+  });
+}
 
   ngOnDestroy() {
-    this.themeSubscription.unsubscribe();
+    this.alive = false;
   }
 }

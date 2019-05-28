@@ -1,5 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import { takeWhile } from 'rxjs/operators';
+import { TrafficChartData } from '../../../@core/data/traffic-chart';
 
 @Component({
   selector: 'ngx-traffic',
@@ -13,30 +15,42 @@ import { NbThemeService } from '@nebular/theme';
                   [ngClass]="{ 'btn-success': currentTheme == 'default', 'btn-primary': currentTheme != 'default'}">
             {{ type }}
           </button>
-          <ul ngbDropdown class="dropdown-menu">
+          <ul ngbDropdownMenu class="dropdown-menu">
             <li class="dropdown-item" *ngFor="let t of types" (click)="type = t">{{ t }}</li>
           </ul>
         </div>
       </nb-card-header>
       <nb-card-body class="p-0">
-        <ngx-traffic-chart></ngx-traffic-chart>
+        <ngx-traffic-chart [points]="trafficChartPoints"></ngx-traffic-chart>
       </nb-card-body>
     </nb-card>
   `,
 })
 export class TrafficComponent implements OnDestroy {
+
+  private alive = true;
+
+  trafficChartPoints: number[];
   type = 'month';
   types = ['week', 'month', 'year'];
   currentTheme: string;
-  themeSubscription: any;
 
-  constructor(private themeService: NbThemeService) {
-    this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
+  constructor(private themeService: NbThemeService,
+              private trafficChartService: TrafficChartData) {
+    this.themeService.getJsTheme()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(theme => {
       this.currentTheme = theme.name;
     });
+
+    this.trafficChartService.getTrafficChartData()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((data) => {
+        this.trafficChartPoints = data;
+      });
   }
 
   ngOnDestroy() {
-    this.themeSubscription.unsubscribe();
+    this.alive = false;
   }
 }

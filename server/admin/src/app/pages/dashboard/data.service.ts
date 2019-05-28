@@ -1,4 +1,4 @@
-import { Http,Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
 import { AppComponent } from '../../app.component'
@@ -6,9 +6,9 @@ import { AppComponent } from '../../app.component'
 @Injectable()
 export class DataService {
   private uuid = 'UuidExample';
-  private Host = "http://123.206.64.174:7777";
-  private RaspberryHost = "http://123.206.64.174:33330/";
-  constructor(private http: Http,
+  private Host = "http://139.180.217.184:7777";
+  private RaspberryHost = "http://139.180.217.184:33330/";
+  constructor(private http: HttpClient,
               private app: AppComponent,) {
 
     this.uuid = app.getUuid();
@@ -27,35 +27,35 @@ export class DataService {
   getTemperature() {
     return this.http.get(this.Host + '/api/temperature/' + this.uuid)
              .toPromise()
-             .then(function(response){ return response.json(); })
+             .then(function(response){ return response; })
              .catch(this.handleError);
   }
 
   getHumidity() {
     return this.http.get(this.Host + '/api/humidity/' + this.uuid)
              .toPromise()
-             .then(function(response){return response.json(); })
+             .then(function(response){return response; })
              .catch(this.handleError);
   }
 
   getHeartRate() {
     return this.http.get(this.Host + '/api/heartRate/' + this.uuid)
              .toPromise()
-             .then(function(response){return response.json(); })
+             .then(function(response){return response; })
              .catch(this.handleError);
   }
 
   getSoup() {
     return this.http.get(this.Host + '/api/getsoup')
              .toPromise()
-             .then(function(response){return response.json(); })
+             .then(function(response){return response; })
              .catch(this.handleError);
   }
 
   getWeather() {
     return this.http.get(this.Host + '/api/getweather')
              .toPromise()
-             .then(function(response){return response.json(); })
+             .then(function(response){return response; })
              .catch(this.handleError);
   }
 

@@ -1,59 +1,48 @@
-import { AfterViewInit, Component, OnDestroy,OnInit } from '@angular/core';
+import { delay, takeWhile } from 'rxjs/operators';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { DataService } from '../../data.service';
-
-declare const echarts: any;
+import { LayoutService } from '../../../../@core/utils';
+import { ElectricityChart } from '../../../../@core/data/electricity';
 
 @Component({
-  providers: [DataService],
   selector: 'ngx-electricity-chart',
   styleUrls: ['./electricity-chart.component.scss'],
   template: `
-    <div echarts [options]="option" class="echart"></div>
+    <div echarts
+         [options]="option"
+         class="echart"
+         (chartInit)="onChartInit($event)">
+    </div>
   `,
 })
 export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
 
+  private alive = true;
+
+  @Input() data: ElectricityChart[];
+
   option: any;
-  data: Array<any>;
-  themeSubscription: any;
-  points = [];
+  echartsIntance: any;
 
   constructor(private theme: NbThemeService,
-              private dataService: DataService) {
-
-    this.dataService.getHeartRate().then(data => {
-      console.log(data);
-      this.points = [data[0][0], data[1][0], data[2][0], data[3][0], data[4][0],data[5][0],data[6][0],data[7][0], data[8][0], data[9][0]];
-      this.data = this.points.map((p, index) => ({
-        label: (index % 5 === 3) ? `${Math.round(index / 5)}` : '',
-        // label: (index % 1 === 1) ? `${Math.round(index / 1)}` : '',
-        value: p,
-      }));
-    });
-
-    // const points = [];
-    // let pointsCount = 100;
-    // let min = -3;
-    // let max = 3;
-    // let xStep = (max - min) / pointsCount;
-    //
-    // for(let x = -3; x <= 3; x += xStep) {
-    //   let res = x**3 - 5*x + 17;
-    //   points.push(Math.round(res * 25));
-    // }
-    //
-    // this.data = this.points.map((p, index) => ({
-    //   label: (index % 5 === 3) ? `${Math.round(index / 5)}` : '',
-    //   value: p,
-    // }));
+              private layoutService: LayoutService) {
+    this.layoutService.onChangeLayoutSize()
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(() => this.resizeChart());
   }
 
   ngAfterViewInit(): void {
-    this.themeSubscription = this.theme.getJsTheme().delay(1).subscribe(config => {
-      const eTheme: any = config.variables.electricity;
+    this.theme.getJsTheme()
+      .pipe(
+        takeWhile(() => this.alive),
+        delay(1),
+      )
+      .subscribe(config => {
+        const eTheme: any = config.variables.electricity;
 
-      this.option = {
+        this.option = {
           grid: {
             left: 0,
             top: 0,
@@ -78,7 +67,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
             backgroundColor: eTheme.tooltipBg,
             borderColor: eTheme.tooltipBorderColor,
             borderWidth: 3,
-            formatter: '{c0} 次/分钟',
+            formatter: '{c0} kWh',
             extraCssText: eTheme.tooltipExtraCss,
           },
           xAxis: {
@@ -90,10 +79,8 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
               show: false,
             },
             axisLabel: {
-              textStyle: {
-                color: eTheme.xAxisTextColor,
-                fontSize: 18,
-              },
+              color: eTheme.xAxisTextColor,
+              fontSize: 18,
             },
             axisLine: {
               lineStyle: {
@@ -194,7 +181,17 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  onChartInit(echarts) {
+    this.echartsIntance = echarts;
+  }
+
+  resizeChart() {
+    if (this.echartsIntance) {
+      this.echartsIntance.resize();
+    }
+  }
+
   ngOnDestroy() {
-    this.themeSubscription.unsubscribe();
+    this.alive = false;
   }
 }
