@@ -11,11 +11,11 @@ export class DataService {
   constructor(private http: HttpClient,
               private app: AppComponent ) {
     this.uuid = app.getUuid();
-    console.log(app.getUuid());
+    // console.log(app.getUuid());
   }
 
-  SetMotor(CMD1: string='11') {
-    console.log(this.uuid);
+  SetMotor(CMD1: string = '11') {
+    // console.log(this.uuid);
     return this.http.get(this.RaspberryHost + this.uuid + '/' + CMD1)
               .toPromise()
               .then(function(response){ return response; })
@@ -58,6 +58,7 @@ export class DataService {
   }
 
   private handleError(error: any): Promise<any> {
+    this.app.getUuid();
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }

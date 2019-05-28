@@ -27,8 +27,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
           datasets: [{
             label: '心率',
-            data: [data[0][0], data[1][0], data[2][0], data[3][0], data[4][0], \
-            data[5][0], data[6][0], data[7][0], data[8][0], data[9][0]],
+            data: [data[0][0], data[1][0], data[2][0], data[3][0], data[4][0], data[5][0], data[6][0], data[7][0], data[8][0], data[9][0]],
             borderColor: colors.info,
             backgroundColor: colors.info,
             fill: false,
@@ -36,8 +35,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
             pointHoverRadius: 10,
           }, {
             label: '血痒饱和度',
-            data: [data[0][1], data[1][1], data[2][1], data[3][1], data[4][1], \
-            data[5][1], data[6][1], data[7][1], data[8][1], data[9][1]],
+            data: [data[0][1], data[1][1], data[2][1], data[3][1], data[4][1], data[5][1], data[6][1], data[7][1], data[8][1], data[9][1]],
             borderColor: colors.success,
             backgroundColor: colors.success,
             fill: false,

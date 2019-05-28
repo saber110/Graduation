@@ -12,6 +12,6 @@ export class WeatherComponent {
   constructor(private dataService: DataService) {
     this.dataService.getWeather().then(data => {
       // console.log(data);
-    })l
+    });
   }
 }

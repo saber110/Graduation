@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { Temperature, TemperatureHumidityData } from '../../../@core/data/temperature-humidity';
 import { takeWhile } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./temperature.component.scss'],
   templateUrl: './temperature.component.html',
 })
-export class TemperatureComponent implements OnDestroy {
+export class TemperatureComponent implements OnInit, OnDestroy {
 
   private alive = true;
 
@@ -36,23 +36,23 @@ export class TemperatureComponent implements OnDestroy {
   themeSubscription: any;
 
   constructor(private theme: NbThemeService,
-              // private temperatureHumidityService: TemperatureHumidityData,
-              private dataService: DataService) {
+    // private temperatureHumidityService: TemperatureHumidityData,
+    private dataService: DataService) {
     this.theme.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(config => {
-      this.colors = config.variables;
-    });
+        this.colors = config.variables;
+      });
   }
 
-  ngOnInit() {
-  this.dataService.getTemperature().then(data => {
-    this.temperature = data[0]['Temperature'];
-  });
-  this.dataService.getHumidity().then(data => {
-    this.humidity = data[0]['Humidity'];
-  });
-}
+  ngOnInit(): void {
+    this.dataService.getTemperature().then(data => {
+      this.temperature = data[0]['Temperature'];
+    });
+    this.dataService.getHumidity().then(data => {
+      this.humidity = data[0]['Humidity'];
+    });
+  }
 
   ngOnDestroy() {
     this.alive = false;

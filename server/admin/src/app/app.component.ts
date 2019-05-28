@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
 
   constructor(private analytics: AnalyticsService,
               private location: Location) {
-    let partten = '[^/]+(?!.*/)';
-    let url = location.path().match(partten);
+    const partten = '[^/]+(?!.*/)';
+    const url = location.path().match(partten);
     this.uuid = url[0];
     // this.uuid = "UuidExample";
   }
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.location.path();
     this.analytics.trackPageViews();
   }
 }
