@@ -116,8 +116,8 @@ bootstrap
 MIT
 The MIT License (MIT)
 
-Copyright (c) 2011-2018 Twitter, Inc.
-Copyright (c) 2011-2018 The Bootstrap Authors
+Copyright (c) 2011-2019 Twitter, Inc.
+Copyright (c) 2011-2019 The Bootstrap Authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -440,6 +440,9 @@ Apache-2.0
    limitations under the License.
 
 
+nebular-icons
+MIT
+
 ionicons
 MIT
 The MIT License (MIT)
@@ -464,9 +467,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-nebular-icons
-MIT
 
 rxjs
 Apache-2.0
@@ -2433,8 +2433,8 @@ ckeditor
 Software License Agreement
 ==========================
 
-CKEditor - The text editor for Internet - http://ckeditor.com
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+CKEditor - The text editor for Internet - https://ckeditor.com/
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 
 Licensed under the terms of any of the following licenses at your
 choice:
@@ -2469,7 +2469,7 @@ done by developers outside of CKSource with their express permission.
 
 The following libraries are included in CKEditor under the MIT license (see Appendix D):
 
-* CKSource Samples Framework (included in the samples) - Copyright (c) 2014-2017, CKSource - Frederico Knabben.
+* CKSource Samples Framework (included in the samples) - Copyright (c) 2014-2019, CKSource - Frederico Knabben.
 * PicoModal (included in `samples/js/sf.js`) - Copyright (c) 2012 James Frasca.
 * CodeMirror (included in the samples) - Copyright (C) 2014 by Marijn Haverbeke <marijnh@gmail.com> and others.
 
