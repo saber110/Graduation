@@ -7,7 +7,7 @@ while true ; do
     # run ssh reserve proxy
     cd $path/client/ReserveProxyPort
     port=`./PortApply`
-    ssh -N -f -R $port:localhost:3333 root@139.180.217.184 -i /home/pi/.ssh/graduate > $path/log/ReserveProxyPort.log &
+    ssh -N -f -R $port:localhost:3333 root@139.180.142.16 -i /home/pi/.ssh/graduate > $path/log/ReserveProxyPort.log &
   fi
   sleep 1
   system=`$path/client/networkStatus/NetworkStatus $system`

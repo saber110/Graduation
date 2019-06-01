@@ -6,8 +6,8 @@ import { AppComponent } from '../../app.component';
 @Injectable()
 export class DataService {
   private uuid = 'UuidExample';
-  private Host = 'http://139.180.217.184:7777';
-  private RaspberryHost = 'http://139.180.217.184:33330/';
+  private Host = 'http://139.180.142.16:7777';
+  private RaspberryHost = 'http://139.180.142.16:33330/';
   constructor(private http: HttpClient,
               private app: AppComponent ) {
     this.uuid = app.getUuid();
