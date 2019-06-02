@@ -1,7 +1,7 @@
 #ifndef _SERVER_H
 #define _SERVER_H
 
-#define SERVPORT 33330   // 服务器监听端口号
+#define SERVPORT 3333   // 服务器监听端口号
 #define BACKLOG 10  // 最大同时连接请求数
 #define MAXDATASIZE 1000
 

@@ -81,6 +81,32 @@ INSERT INTO `UuidExample` (`id`, `HeartRate`, `SpO2`, `Temperature`, `Humidity`,
 (25, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
 (26, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01');
 
+
+CREATE TABLE `170320170103031` (
+  `id` int(11) NOT NULL,
+  `HeartRate` int(11) NOT NULL COMMENT '心率',
+  `SpO2` int(11) NOT NULL COMMENT '血氧饱和度',
+  `Temperature` int(11) NOT NULL COMMENT '室内温度',
+  `Humidity` int(11) NOT NULL COMMENT '室内湿度',
+  `Weather` text NOT NULL COMMENT '当地天气',
+  `UsageTime` text NOT NULL COMMENT '此次数据产生时间',
+  `SynTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '此次数据同步时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='170320170103031';
+
+
+INSERT INTO `170320170103031` (`id`, `HeartRate`, `SpO2`, `Temperature`, `Humidity`, `Weather`, `UsageTime`, `SynTime`) VALUES
+(1, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(3, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01'),
+(17, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(18, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01'),
+(19, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(20, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01'),
+(21, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(22, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01'),
+(23, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(24, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01'),
+(25, 85, 95, 12, 68, '晴', '20170805', '2017-12-27 13:07:59'),
+(26, 83, 94, 12, 68, '晴', '20170805', '2018-01-03 02:41:01');
 --
 -- Indexes for dumped tables
 --
@@ -97,6 +123,9 @@ ALTER TABLE `User`
 ALTER TABLE `UuidExample`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `170320170103031`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- 在导出的表使用AUTO_INCREMENT
 --
@@ -111,6 +140,10 @@ ALTER TABLE `User`
 -- 使用表AUTO_INCREMENT `UuidExample`
 --
 ALTER TABLE `UuidExample`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
+ALTER TABLE `170320170103031`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
