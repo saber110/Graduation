@@ -20,9 +20,9 @@ void MotorDuty(int value)
 
   switch (value)
   {
-    case MOTORONE:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "慢速按摩", "&"); break;
-    case MOTORTWO:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "中速按摩", "&"); break;
-    case MOTORTHR:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "快速按摩", "&"); break;
+    case MOTORONE:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "慢速按摩摩", "&"); break;
+    case MOTORTWO:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "中速按摩摩", "&"); break;
+    case MOTORTHR:  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "快速按摩摩", "&"); break;
     default:;;
   }
   printf("%s\n", command);
@@ -33,7 +33,7 @@ void MotorDuty(int value)
 void MotorStop()
 {
   char command[100] = {0};
-  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "按摩结束", "&");
+  snprintf(command, sizeof(command),"%s%s %s %s %s", ClientPATH, TTS, "temp.wav", "按摩结束束", "&");
   printf("%s\n", command);
   system(command);
   MotorDuty(0);
