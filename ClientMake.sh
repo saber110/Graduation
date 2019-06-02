@@ -1,8 +1,8 @@
 #!/bin/bash
 path=$(cd `dirname $0`; pwd)
 
-cd $path/client
-make
+# cd $path/client
+# make
 
 cd $path/client/cmdOpt
 make

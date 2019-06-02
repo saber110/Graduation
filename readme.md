@@ -67,11 +67,11 @@ echo run.sh >> /etc/rc.local
   - TTS
   ```
   nano /etc/profile
-  export LD_LIBRARY_PATH="/home/pi/BiYeSheJi/client/tts/libs/RaspberryPi"
+  export LD_LIBRARY_PATH="/home/pi/Graduation/client/tts/libs/RaspberryPi"
 
   # 开机启动的时候由init监护
   nano /root/.bashrc
-  export LD_LIBRARY_PATH="/home/pi/BiYeSheJi/client/tts/libs/RaspberryPi"
+  export LD_LIBRARY_PATH="/home/pi/Graduation/client/tts/libs/RaspberryPi"
   ```
 
 ```
